@@ -1,16 +1,37 @@
-# React + Vite
+# AI Content Evaluator - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of the AI Content Evaluator project, built with **React** and **Vite**. It includes the **landing page**, **user role selection**, and **authentication pages**.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Landing Page with project overview
+- User Roles selection (Teacher, Student, Admin)
+- Authentication pages (Login / Signup)
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React** - UI library
+- **Vite** - Build tool and dev server
+- **CSS / Tailwind** (or your CSS framework if used)
+- Optional: any other libraries (like React Router, Axios)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+### Prerequisites
+
+- Node.js v18+ installed
+- npm or yarn
+
+### Install
+
+```bash
+git clone https://github.com/rkhassan420/FYP-Frontend.git
+cd FYP-Frontend
+npm install
+
+#Run Locally
+npm run dev
+
+#Build for production
+npm run build
