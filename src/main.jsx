@@ -7,7 +7,9 @@ import Loading from "./components/Loading.jsx";
 
 
 const Error = React.lazy(() => import('./components/Error.jsx'));
+
 const RoleSelection = React.lazy(() => import('./pages/Demo/RoleSelection.jsx'));
+
 const TeacherLogin = React.lazy(() => import('./pages/Teacher/TeacherLogin.jsx'));
 const TeacherSignup = React.lazy(() => import('./pages/Teacher/TeacherSignup.jsx'));
 const TeacherOtpVerify = React.lazy(() => import('./pages/Teacher/TeacherOtpVerify.jsx'));
@@ -17,8 +19,9 @@ const TeacherSetNewPass = React.lazy(() => import('./pages/Teacher/TeacherSetNew
 const StudentLogin = React.lazy(() => import('./pages/Student/StudentLogin.jsx'));
 const StudentPasswordForgot = React.lazy(() => import('./pages/Student/StudentPasswordForgot.jsx'));
 
-
 const AdminLogin = React.lazy(() => import('./pages/Admin/AdminLogin.jsx'));
+
+const TeacherDashboard = React.lazy(() => import('./pages/Teacher/TeacherDashboard.jsx'));
 
 
 const TeacherDemo = React.lazy(() => import('./pages/Demo/TeacherDemo.jsx'));
@@ -63,6 +66,7 @@ const router = createBrowserRouter([
   },
 
 
+
   {
     path:"/login/student",
     element:<StudentLogin />
@@ -78,6 +82,13 @@ const router = createBrowserRouter([
     element:<AdminLogin />
   },
 
+
+
+
+   {
+    path:"/teacher/dashboard",
+    element:<TeacherDashboard />
+  },
   
 
 
