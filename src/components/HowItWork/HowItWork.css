@@ -1,0 +1,35 @@
+.steps-grid { position: relative; }
+
+.step { text-align: center; }
+.step h3  { font-size: 1.125rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+.step p   { font-size: 0.875rem; color: var(--muted); }
+
+.step-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  box-shadow: var(--shadow-lg);
+  color: #fff;
+}
+
+.step-blue   { background: linear-gradient(135deg, var(--blue),   var(--blue-dark));    }
+.step-purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark));  }
+.step-amber  { background: linear-gradient(135deg, #f59e0b,       var(--amber));        }
+.step-green  { background: linear-gradient(135deg, #22c55e,       var(--green));        }
+
+.step-num {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.step-blue-text   { color: var(--blue);   }
+.step-purple-text { color: var(--purple); }
+.step-amber-text  { color: var(--amber);  }
+.step-green-text  { color: var(--green);  }

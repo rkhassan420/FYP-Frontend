@@ -1,7 +1,7 @@
 import React, { useState,lazy } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../css/Teacher/login.css"
-const AuthHeader = lazy(() => import("../../components/AuthHeader"));
+const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
 
 const VerifyOTP = () => {
   const [otp, setOtp] = useState("");

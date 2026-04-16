@@ -1,0 +1,42 @@
+
+/* ── Role Cards ───────────────────────────────────────────── */
+.role-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.role-card h3 { font-size: 1.25rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem; }
+.role-card p  { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+
+.role-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+.role-blue   { background: linear-gradient(135deg, var(--blue-light),  var(--blue-mid));   color: var(--blue);   }
+.role-green  { background: linear-gradient(135deg, var(--green-light), var(--green-mid));  color: var(--green);  }
+.role-purple { background: linear-gradient(135deg, var(--purple-light),var(--purple-mid)); color: var(--purple); }
+
+.btn-role {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.2s, opacity 0.2s;
+}
+.btn-role:hover { opacity: 0.9; box-shadow: var(--shadow-lg); }
+.btn-role-blue   { background: linear-gradient(135deg, var(--blue),   var(--blue-dark));   }
+.btn-role-green  { background: linear-gradient(135deg, var(--green),  var(--green-dark));  }
+.btn-role-purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); }
+

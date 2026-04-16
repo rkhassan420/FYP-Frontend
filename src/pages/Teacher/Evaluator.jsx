@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Icon, ICONS } from "../Teacher/TeacherIcons";
 import "../../css/Teacher/Evaluator.css";
 
-export default function Evaluator() {
+export default function Evaluator({ fullscreen, setFullscreen }) {
   const [input, setInput] = useState("");
   const [fileName, setFileName] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -52,8 +52,34 @@ Grammer Mistakes :  80%`,
   };
 
   return (
-    <div className="panel-card evaluator-card">
+    
+    // <div className="panel-card evaluator-card">
         
+    //   <div className="evaluator-topbar">
+    //     <div className="evaluator-badge">
+    //       <div className="evaluator-icon">
+    //         <Icon d={ICONS.zap} size={16} />
+    //       </div>
+
+    //       <div>
+    //         <h3 className="evaluator-title">AI Evaluator</h3>
+    //         <p className="evaluator-subtitle">
+    //           Assignment analysis assistant
+    //         </p>
+    //       </div>
+    //     </div>
+
+    //     <div className="maximize-btn" title="Fullscreen" >
+    //         <Icon d={ICONS.maximize} size={18}  />
+    //     </div>
+
+        
+
+    //   </div>
+
+     <div className={`panel-card evaluator-card ${fullscreen ? "fullscreen" : ""}`}>
+      
+      {/* Top Bar */}
       <div className="evaluator-topbar">
         <div className="evaluator-badge">
           <div className="evaluator-icon">
@@ -67,10 +93,17 @@ Grammer Mistakes :  80%`,
             </p>
           </div>
         </div>
-        <div className="maximize-btn" title="Fullscreen" >
-            <Icon d={ICONS.maximize} size={18}  />
-          </div>
+
+        {/* Fullscreen / Maximize Button */}
+        <div
+          className="maximize-btn"
+          title={fullscreen ? "Exit Fullscreen" : "Fullscreen"}
+          onClick={() => setFullscreen(!fullscreen)}
+        >
+          <Icon d={ICONS.maximize} size={18} />
+        </div>
       </div>
+
 
       <div className="chat-scroll-area">
         {messages.map((msg, index) => (

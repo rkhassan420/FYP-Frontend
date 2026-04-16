@@ -32,6 +32,7 @@ html, body, #root {
 
 /* ─── Main ─── */
 .main {
+ 
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -39,15 +40,25 @@ html, body, #root {
 }
 
 /* ─── Content ─── */
-.content {
+.content.dashboard {
+  
   flex: 1;
   overflow-y: auto;
+  overflow: auto;
   padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
+/* Content for evaluator or other pages with no padding */
+.content.full {  
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* take full height */
+  
+}
 
 /* ─── Stat Cards ─── */
 .stats-grid {
@@ -236,5 +247,8 @@ html, body, #root {
 .action-btn.review:hover { color: #1d4ed8; }
 .action-btn.view   { color: #6b7280; }
 .action-btn.view:hover   { color: #374151; }
+
+
+
 
 

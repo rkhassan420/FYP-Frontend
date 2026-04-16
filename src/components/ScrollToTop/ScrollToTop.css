@@ -1,0 +1,61 @@
+.scroll-top {
+  position: fixed;
+  bottom: 85px; 
+  right: 35px;  
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: var(--blue-dark);  
+  color: var(--surface); 
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 99; 
+  box-shadow: var(--shadow-md); 
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top.show:hover {
+  background: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================= */
+
+
+@media screen and (max-width: 768px) {
+  .scroll-top {
+    bottom: 40px;
+    right: 25px;  
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .scroll-top {
+    bottom: 25px; 
+    right: 15px; 
+    
+  
+    width: 42px;
+    height: 42px;
+    font-size: 18px; 
+  }
+}

@@ -1,19 +1,17 @@
-import "./App.css";
-import React, { useEffect, lazy, Suspense, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Loading from "./components/Loading";
+import React, { useEffect, lazy, Suspense} from "react";
+import Loading from "./components/Loading/Loading";
 
-const Navbar = lazy(() => import("./components/LandingPage/Navbar"));
-const Hero = lazy(() => import("./components/LandingPage/Hero"));
-const Features = lazy(() => import("./components/LandingPage/Features"));
-const HowItWorks = lazy(() => import("./components/LandingPage/HowItWorks"));
-const Roles = lazy(() => import("./components/LandingPage/Roles"));
-const Advantages = lazy(() => import("./components/LandingPage/Advantages"));
-const Security = lazy(() => import("./components/LandingPage/Security"));
-const FAQAccordion = lazy(() => import("./components/LandingPage/FAQ"));
-const About = lazy(() => import("./components/LandingPage/About"));
-const Footer = lazy(() => import("./components/LandingPage/Footer"));
-const ScrollToTop = lazy(() => import("./components/LandingPage/ScrollToTop"));
+const Navbar = lazy(() => import("./components/Navbar/Navbar"));
+const Hero = lazy(() => import("./components/Hero/Hero"));
+const Features = lazy(() => import("./components/Feature/Features"));
+const HowItWorks = lazy(() => import("./components/HowItWork/HowItWorks"));
+const Roles = lazy(() => import("./components/Roles/Roles"));
+const Advantages = lazy(() => import("./components/Advantage/Advantages"));
+const Security = lazy(() => import("./components/Security/Security"));
+const FAQAccordion = lazy(() => import("./components/FAQ/FAQ"));
+const About = lazy(() => import("./components/About/About"));
+const Footer = lazy(() => import("./components/Footer/Footer"));
+const ScrollToTop = lazy(() => import("./components/ScrollToTop/ScrollToTop"));
 
 
 function scrollTo(id) {

@@ -1,0 +1,832 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* =========================================
+   1. CSS Variables (Design Tokens)
+   ========================================= */
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  
+  --bg-main: #ffffff;
+  --bg-subtle: #f9fafb;
+  --border: #e5e7eb;
+  
+  --font-main: 'Outfit', sans-serif;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+/* =========================================
+   2. Animations
+   ========================================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rowOut {
+  to   { opacity: 0; transform: translateX(20px); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.fade-in {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+/* =========================================
+   3. Page Layout & Typography
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
+.page-wrapper {
+  width: 100%;
+  height: 100vh;
+  padding: 24px 32px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: var(--font-main);
+  background: var(--bg-subtle);
+}
+
+.page-inner {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 32px;  
+}
+
+.page-title {
+ 
+ 
+
+  color: var(--text-main);
+
+    margin: 0;
+  font-weight: 500;
+  color: #1e293b;
+  font-size: 0.5rem;
+}
+
+.page-subtitle {
+  margin-top: 0;
+  font-size: 0.2rem;
+  color: var(--text-muted); 
+}
+
+/* =========================================
+   4. Cards & Containers
+   ========================================= */
+.card {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 32px;
+}
+
+.card-title, .section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 24px 0;
+}
+
+/* =========================================
+   5. Grids & Forms
+   ========================================= */
+/* Fluid grid handles mobile & desktop automatically */
+.top-row, .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px 24px;
+}
+
+.top-row {
+  margin-bottom: 32px;
+}
+
+.form-grid {
+  margin-bottom: 24px;
+}
+
+.form-row-split {
+  display: flex;
+  gap: 16px;
+}
+
+.form-col-half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.input-field {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  color: var(--text-main);
+  background: var(--bg-main);
+  width: 100%;
+  transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.input-field::placeholder {
+  color: var(--text-light);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.input-field:disabled {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+select.input-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.search-input {
+  padding-left: 42px;
+}
+
+.form-error-message {
+  color: var(--danger);
+  font-size: 0.875rem;
+  margin: 0 0 1rem 0;
+  grid-column: 1 / -1;
+}
+
+/* =========================================
+   6. Buttons
+   ========================================= */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary) 0%, #2563eb 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-secondary-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-secondary-outline:hover {
+  background: var(--bg-subtle);
+  border-color: #d1d5db;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  transform: scale(1.08);
+  background-color: red;
+  color: white;
+
+}
+
+.icon-btn-view   { background: #dcfce7; color: #16a34a; }
+.icon-btn-view:hover { background: #bbf7d0; }
+
+.icon-btn-edit   { background: #fef3c7; color: #f59e0b; }
+.icon-btn-edit:hover { background: #fde68a; }
+
+.icon-btn-delete { background: #fee2e2; color: var(--danger); }
+.icon-btn-delete:hover { background: #fecaca; }
+
+/* =========================================
+   7. Data Table
+   ========================================= */
+.table-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-card {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* Prevents columns from squishing on mobile */
+}
+
+.students-table thead {
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+.students-table thead th {
+  text-align: left;
+  padding: 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.students-table thead th.text-right {
+  text-align: right;
+}
+
+.students-table tbody tr {
+  border-bottom: 1px solid var(--bg-subtle);
+}
+
+.students-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.students-table tbody td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+.student-row {
+  animation: rowIn 0.4s ease-out both;
+  transition: background 0.2s;
+}
+
+.student-row:hover {
+  background: var(--bg-subtle);
+}
+
+.student-row.deleting {
+  animation: rowOut 0.3s ease-out forwards;
+}
+
+.student-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.student-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.student-id, .student-email, .student-contact {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.student-password {
+  font-family: monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.actions-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  padding: 40px !important;
+}
+
+/* =========================================
+   8. Avatars & Badges
+   ========================================= */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar span {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-shift { background: #dbeafe; color: #1e40af; }
+.badge-session { background: #f3e8ff; color: #6b21a8; }
+.badge-class { background: #e0f2fe; color: #0369a1; }
+
+/* =========================================
+   9. Custom Delete Modal
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(17, 24, 39, 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+
+.modal-card {
+  padding: 32px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  animation: fadeInScale 0.25s ease-out;
+  background: var(--bg-main);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modal-icon-wrapper {
+  color: var(--danger);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-title {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.modal-desc {
+  margin: 0 0 24px 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.modal-btn-cancel, .modal-btn-delete {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn-cancel {
+  border: 1px solid var(--border);
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+.modal-btn-cancel:hover {
+  background: var(--bg-subtle);
+}
+
+.modal-btn-delete {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+}
+
+.modal-btn-delete:hover {
+  background: var(--danger-hover);
+}
+
+/* =========================================
+   10. Media Queries (Mobile Adjustments)
+   ========================================= */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 16px 16px 32px 16px;
+  }
+  
+  .card {
+    padding: 24px 20px;
+  }
+  
+  /* Stack split inputs vertically on small screens */
+  .form-row-split {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary, .btn-secondary-outline {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+/* =========================================
+   Large View Modal & Assignment History
+   ========================================= */
+.modal-card-large {
+  width: 100vw !important;     /* 100% of viewport width */
+  height: 100vh !important;    /* 100% of viewport height */
+  max-width: none !important;  /* Override any existing max-width restrictions */
+  max-height: none !important; /* Override any existing max-height restrictions */
+  border-radius: 0 !important; /* Remove rounded corners so it sits perfectly flush */
+  border: none !important;     /* Remove outer borders */
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  padding: 0; 
+  text-align: left;
+  
+  /* This ensures it breaks out of any padding the overlay wrapper might have */
+  position: absolute; 
+  top: 0;
+  left: 0;
+}
+
+.modal-header-custom {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--bg-main);
+}
+
+.modal-body-custom {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  background: var(--bg-main);
+}
+
+.modal-footer-custom {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  background: var(--bg-subtle);
+}
+
+
+/* Assignment Status Badges */
+.badge-pending { background: #fef3c7; color: #d97706; }
+.badge-submitted { background: #e0f2fe; color: #0284c7; }
+
+
+/* =========================================
+   File Download Button in Modal
+   ========================================= */
+.file-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  background: #eff6ff;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.file-download-btn:hover {
+  background: var(--primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+
+/* =========================================
+   Smooth Modal Open & Close Animations
+   ========================================= */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeOutOverlay {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes fadeOutScale {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+
+/* Apply overlay animations */
+.modal-overlay {
+  animation: fadeInOverlay 0.25s ease-out;
+}
+
+.modal-overlay.closing {
+  animation: fadeOutOverlay 0.25s ease-in forwards;
+}
+
+/* Apply card open/close animations */
+.modal-card {
+  animation: fadeInScale 0.25s ease-out;
+}
+
+.modal-card.closing {
+  animation: fadeOutScale 0.25s ease-in forwards;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   Export Modal Styles
+   ========================================= */
+.export-section {
+  margin-bottom: 24px;
+}
+
+.export-section-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.export-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  background: var(--bg-subtle);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text-main);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.export-format-group {
+  display: flex;
+  gap: 16px;
+  background: var(--bg-subtle);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.radio-input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-family: var(--font-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-export:hover {
+  background: var(--bg-subtle);
+  border-color: var(--text-light);
+}
+
+
+
+
+/* =========================================
+   Download Button Progress & Spinner
+   ========================================= */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden; /* Keeps the progress background inside the rounded corners */
+}
+
+.download-progress-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.25); /* Subtle white overlay for the loading bar */
+  transition: width 0.2s ease-out;
+  z-index: 0;
+}
+
+.btn-content-relative {
+  position: relative;
+  z-index: 1; /* Keeps text above the progress bar */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

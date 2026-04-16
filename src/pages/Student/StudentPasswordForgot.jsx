@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CheckCircle } from "lucide-react";
 import "../../css/Teacher/login.css";
 
-const AuthHeader = lazy(() => import("../../components/AuthHeader"));
+const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
 
 export default function ForgotPassword() {
   const [identifier, setIdentifier] = useState("");
@@ -17,6 +17,7 @@ export default function ForgotPassword() {
     console.log({ identifier });
 
     setSubmitted(true);
+    navigate("/student/verify-otp");
   };
 
   return (
@@ -29,8 +30,7 @@ export default function ForgotPassword() {
             <div className="forgot-header">
               <h2>Forgot Password</h2>
               <p>
-                Enter your Student ID or registered email. Your request will be
-                reviewed by the admin.
+                Enter your Student ID or registered email
               </p>
             </div>
 

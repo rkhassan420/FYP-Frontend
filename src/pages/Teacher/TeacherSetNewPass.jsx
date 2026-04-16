@@ -2,7 +2,7 @@ import React, { useState,lazy } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Eye, EyeOff, CheckCircle } from "lucide-react";
 import "../../css/Teacher/login.css"
-const AuthHeader = lazy(() => import("../../components/AuthHeader"));
+const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
 
 const ResetPassword = () => {
   const navigate = useNavigate();

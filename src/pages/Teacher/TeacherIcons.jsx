@@ -42,18 +42,24 @@ export const ICONS = {
   bell:
     "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9 M13.73 21a2 2 0 0 1-3.46 0",
 
-    upload:
+  upload:
     "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M17 8l-5-5-5 5 M12 3v12",
 
   zap:
     "M13 2L3 14h7l-1 8 10-12h-7l1-8z",
 
-   send: [
+  send: [
   "M22 2 2 12l7 3 3 7 10-20z",  // main plane shape
   "M2 12 12 22"                 // trail line for style
 ],
 
-maximize: "M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z",
+  maximize: "M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z",
 
  collapse: "M6 9l6 6 6-6",
+
+ // Add to your TeacherIcons.js ICONS object:
+moon: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z",
+sun: "M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z",
+
+ 
 };

@@ -2,7 +2,7 @@ import React, { useState, lazy } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react"; // Import Lucide icons
 import "../../css/Teacher/login.css";
-const AuthHeader = lazy(() => import("../../components/AuthHeader"));
+const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
 
 const Login = ({ role }) => {
   const navigate = useNavigate();

@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="header">
       <div>
-        <h2 className="header-title">Dashboard</h2>
+        {/* <h2 className="header-title">Dashboard</h2> */}
         <p className="header-subtitle">
           Welcome back, <strong>Dr. Salman Khan</strong>
         </p>

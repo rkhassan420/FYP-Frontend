@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import "../../css/Teacher/login.css";
 
-const AuthHeader = lazy(() => import("../../components/AuthHeader"));
+const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
 
 const Login = ({ role }) => {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Login = ({ role }) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
+     navigate("/admin/dashboard");
     
   };
 

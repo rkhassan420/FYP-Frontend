@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import "../../css/Teacher/login.css";
 
-const AuthHeader = lazy(() => import("../../components/AuthHeader"));
+const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
 
 const Login = ({ role }) => {
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const Login = ({ role }) => {
     e.preventDefault();
 
     // TODO: Add login API here
+    navigate("/student/dashboard");
   };
 
   return (
@@ -33,7 +34,6 @@ const Login = ({ role }) => {
               placeholder="Student ID"
               value={studentId}
               onChange={(e) => setStudentId(e.target.value)}
-             
             />
 
             <div className="password-field">
@@ -42,7 +42,6 @@ const Login = ({ role }) => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-             
               />
 
               <span
@@ -63,6 +62,19 @@ const Login = ({ role }) => {
             <button type="submit" className="btn-primary btn-lg">
               Login
             </button>
+
+            {/* ─── New Signup Link Added Here ─── */}
+            <div style={{ textAlign: "center", marginTop: "15px", fontSize: "14px" }}>
+              Don't have an account?{" "}
+              <span
+                className="forgot"
+                style={{ cursor: "pointer", color: "#0056b3", fontWeight: "bold" }}
+                onClick={() => navigate("/signup/student")}
+              >
+                Sign up here
+              </span>
+            </div>
+            
           </form>
         </div>
       </div>

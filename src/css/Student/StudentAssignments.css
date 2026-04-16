@@ -1,0 +1,273 @@
+/* ==============================================================
+   Student Assignments Page Styles
+   ============================================================== */
+
+
+.assignment-layout {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .assignment-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Left Column: Details ─── */
+.assignment-details {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.detail-header {
+  border-bottom: 1px solid var(--border, #e2e8f0);
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+
+.assignment-title {
+  font-size: 1.8rem;
+  color: var(--text-main, #1e293b);
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.assignment-meta {
+  color: var(--text-muted, #64748b);
+  font-size: 1rem;
+  margin: 0 0 20px 0;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-pending {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.badge-submitted {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.due-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted, #64748b);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.points-badge {
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto; /* pushes to the right */
+}
+
+.detail-body h3 {
+  font-size: 1.2rem;
+  color: var(--text-main, #1e293b);
+  margin-bottom: 12px;
+}
+
+.detail-body p {
+  color: #475569;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* ─── Right Column: Submission Panel ─── */
+.submission-panel {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.panel-title {
+  font-size: 1.25rem;
+  color: var(--text-main, #1e293b);
+  margin: 0 0 20px 0;
+}
+
+/* Drop Zone */
+.drop-zone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.drop-zone:hover, .drop-zone.dragging {
+  border-color: var(--primary, #4f46e5);
+  background-color: #e0e7ff;
+}
+
+.upload-icon {
+  color: #94a3b8;
+  margin-bottom: 12px;
+  transition: color 0.2s;
+}
+
+.drop-zone:hover .upload-icon, .drop-zone.dragging .upload-icon {
+  color: var(--primary, #4f46e5);
+}
+
+.drop-zone h4 {
+  color: var(--text-main, #1e293b);
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+}
+
+.drop-zone p {
+  color: var(--text-muted, #64748b);
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* File Preview */
+.file-preview {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.success-preview {
+  background-color: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.file-type-icon {
+  color: var(--primary, #4f46e5);
+  margin-right: 16px;
+}
+
+.file-info {
+  flex-grow: 1;
+}
+
+.file-name {
+  font-weight: 600;
+  color: var(--text-main, #1e293b);
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+
+.file-size {
+  color: var(--text-muted, #64748b);
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.remove-file-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.remove-file-btn:hover {
+  background-color: #e2e8f0;
+  color: #ef4444;
+}
+
+/* Progress & Errors */
+.upload-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  background-color: #fef2f2;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.progress-container {
+  margin-bottom: 20px;
+}
+
+.progress-bar-wrapper {
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary, #4f46e5);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  display: block;
+  text-align: right;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.05rem;
+}
+
+.btn-secondary-outline {
+  background-color: transparent;
+  color: var(--text-main, #1e293b);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-outline:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}

@@ -1,0 +1,257 @@
+/* ==============================================================
+   Student Classes Page Styles
+   ============================================================== */
+
+.page-wrapper {
+  min-height: 100%;
+  background-color: var(--bg-main, #f8fafc);
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-header {
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main, #1e293b);
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted, #64748b);
+  margin: 0;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--primary, #4f46e5);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* ─── Grid Layout ─── */
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* ─── Class Card Styles ─── */
+.class-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid var(--border, #e2e8f0);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Setup for animation */
+  opacity: 0;
+  animation: slideUpFade 0.5s ease-out forwards;
+}
+
+.class-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+/* ─── Theme Colors ─── */
+.theme-blue .class-icon-wrapper { background-color: #dbeafe; color: #1d4ed8; }
+.theme-blue .progress-fill { background-color: #3b82f6; }
+
+.theme-purple .class-icon-wrapper { background-color: #f3e8ff; color: #7c3aed; }
+.theme-purple .progress-fill { background-color: #8b5cf6; }
+
+.theme-amber .class-icon-wrapper { background-color: #fef3c7; color: #d97706; }
+.theme-amber .progress-fill { background-color: #f59e0b; }
+
+/* ─── Card Content ─── */
+.class-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.class-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.class-title-wrapper {
+  flex: 1;
+}
+
+.class-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main, #1e293b);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.class-code {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted, #64748b);
+  background-color: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.teacher-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted, #64748b);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+/* ─── Progress Bar ─── */
+.progress-section {
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-main, #1e293b);
+  margin-bottom: 10px;
+}
+
+.progress-percentage {
+  font-weight: 700;
+}
+
+.progress-track {
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748b);
+  margin: 0;
+}
+
+/* ─── Card Footer ─── */
+.class-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.pending-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #c2410c;
+  background-color: #ffedd5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.all-caught-up-badge {
+  color: #15803d;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.open-class-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  color: var(--primary, #4f46e5);
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.open-class-btn:hover {
+  background-color: var(--primary-light, #e0e7ff);
+}
+
+/* ─── Empty State ─── */
+.empty-state-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px dashed #cbd5e1;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted, #64748b);
+}
+
+.empty-icon {
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.empty-state-card h3 {
+  color: var(--text-main, #1e293b);
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+}
+
+.empty-state-card p {
+  margin: 0;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ─── Animations ─── */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

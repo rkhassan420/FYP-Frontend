@@ -3,13 +3,14 @@
 .evaluator-card {
   display: flex;
   flex-direction: column;
-  max-height: 600px;
+  max-height: 100%;
   padding: 0;
   overflow: hidden;
+  
 }
 
 .evaluator-topbar {
-  padding: 15px 20px;
+  padding: 17px 20px;
   border-bottom: 1px solid #e5e7eb;
   background: #fff;
   display: flex;
@@ -232,23 +233,19 @@
   background-color: #2563eb;
 }
 
-@media (max-width: 768px) {
-  .evaluator-card {
-    height: 600px;
-  }
 
-  .chat-bubble {
-    max-width: 95%;
-  }
+.evaluator-card.fullscreen {
+  position: fixed; /* takes the div out of normal flow */
+  top: 0;
+  left: 0;
+  width: 100vw; /* full viewport width */
+  height: 100vh; /* full viewport height */
+  z-index: 9999; /* on top of everything */
+  border-radius: 0; /* remove any rounded corners */  
+  background: #fff; /* make sure it’s visible */
+  box-shadow: none; /* remove shadow if any */
+}
 
-  .chat-input-footer {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .upload-chip,
-  .send-btn {
-    width: 100%;
-    border-radius: 12px;
-  }
+.evaluator-card {
+  transition: all 0.4s ease;
 }
