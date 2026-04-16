@@ -1,37 +1,55 @@
-# AI Content Evaluator - Frontend
+#  AI Content Evaluator - Frontend
 
-This is the **frontend** of the AI Content Evaluator project, built with **React** and **Vite**. It includes the **landing page**, **user role selection**, and **authentication pages**.
+This is the **frontend application** of the AI Content Evaluator system, built using **React** and **Vite**.  
+It provides a modern, responsive interface for users to interact with the platform, including authentication and role-based access.
 
-## Features
+> ⚠️ This project is currently under active development. Features and UI will be continuously improved.
 
-- Landing Page with project overview
-- User Roles selection (Teacher, Student, Admin)
-- Authentication pages (Login / Signup)
+---
+
+## ✨ Current Features
+
+- 🎯 Modern **Landing Page** with project overview
+- 👥 **User Role Selection** (Teacher, Student, Admin)
+- 🔐 **Authentication System**
+  - Login
+  - Signup
+- 📱 Fully **Responsive Design** (Mobile, Tablet, Desktop)
+
+---
+
+## 🛠️ Tech Stack
+
+- **React.js** — Component-based UI development  
+- **Vite** — Fast build tool and development server  
+- **CSS / Custom Styling** — Clean and responsive UI  
+- **React Router** — Client-side routing *(if used)*  
+- **Axios / Fetch API** — API communication *(if used)*  
+
+---
+
+## 📂 Project Structure
+
+src/
+│── components/ # Reusable UI components
+│── pages/ # Application pages (Landing, Auth, etc.)
+│── assets/ # Images, icons, static files
+│── styles/ # CSS files
+│── App.jsx # Main app component
+│── main.jsx # Entry point
 
 
-## Tech Stack
+Upcoming Features
+📊 AI-based content analysis dashboard
+🧑‍🏫 Teacher dashboard
+🎓 Student submission system
+📈 Reports & analytics
+🔒 Role-based protected routes
+🌙 Dark mode improvements
 
-- **React** - UI library
-- **Vite** - Build tool and dev server
-- **CSS / Tailwind** (or your CSS framework if used)
-- Optional: any other libraries (like React Router, Axios)
 
-## Getting Started
+##Contributing
+This is a Final Year Project (FYP), but suggestions and improvements are always welcome.
 
-### Prerequisites
 
-- Node.js v18+ installed
-- npm or yarn
 
-### Install
-
-```bash
-git clone https://github.com/rkhassan420/FYP-Frontend.git
-cd FYP-Frontend
-npm install
-
-#Run Locally
-npm run dev
-
-#Build for production
-npm run build
