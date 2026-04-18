@@ -2,9 +2,9 @@ import React, { useState, lazy } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Eye, EyeOff, CheckCircle } from "lucide-react";
 // Reusing the same CSS file for consistent branding
-import "../../css/Teacher/login.css";
+import "../../../css/Teacher/TeacherAuth/login.css";
 
-const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
 
 const StudentResetPassword = () => {
   const navigate = useNavigate();
@@ -88,7 +88,7 @@ const StudentResetPassword = () => {
 
                 {error && <p style={{ color: "#ef4444", textAlign:"left", fontSize: "0.85rem", marginBottom: "1rem" }}>{error}</p>}
 
-                <button type="submit" className="btn-primary btn-lg">
+                <button type="submit" className="btn-primary-auth btn-lg">
                   Update Password
                 </button>
               </form>

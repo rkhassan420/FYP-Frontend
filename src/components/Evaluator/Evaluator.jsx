@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Icon, ICONS } from "../Teacher/TeacherIcons";
-import "../../css/Teacher/Evaluator.css";
+import { Icon, ICONS } from "../../pages/Teacher/TeacherIcons";
+import "./Evaluator.css";
 
 export default function Evaluator({ fullscreen, setFullscreen }) {
   const [input, setInput] = useState("");

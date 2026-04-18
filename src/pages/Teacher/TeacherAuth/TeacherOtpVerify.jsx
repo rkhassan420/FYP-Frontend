@@ -1,37 +1,46 @@
 import React, { useState,lazy } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../../css/Teacher/login.css"
-const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
+import "../../../css/Teacher/TeacherAuth/login.css";
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
+import SuccessModal from "../../../components/SuccessModal/SuccessModal";
 
 const VerifyOTP = () => {
   const [otp, setOtp] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const [success, setSuccess] = useState(false);
 
 const email = location.state?.email;
 const flow = location.state?.flow;  
 
-  const handleVerify = (e) => {
+const handleVerify = (e) => {
   e.preventDefault();
 
-  // TODO: verify OTP API
+  // TODO: verify OTP API here
 
   if (flow === "signup") {
-    navigate("/login/teacher");   // after signup → login
+    setSuccess(true); // show modal first
+
+    setTimeout(() => {
+      navigate("/login/teacher");
+    }, 2000);
+
   } else if (flow === "forgot") {
-    navigate("/set-password/teacher", { state: { email } }); // → reset password
+    navigate("/set-password/teacher", { state: { email } });
   }
 };
 
   return (
-     <div>
+    <div>
     <AuthHeader />
     <div className="login-wrapper">
-      <div className="login-card">
-        {/* <h2>Email Verification</h2> */}
-        <h2>
-  {flow === "signup" ? "Verify Your Email" : "Reset Password OTP"}
-</h2>
+
+    {!success ? (
+    <>
+
+      <div className="login-card">      
+  
+        <h2>  {flow === "signup" ? "Verify Your Email" : "Reset Password OTP"} </h2>
         <p>Enter the OTP sent to <b>{email}</b></p>
 
         <form onSubmit={handleVerify} className="login-form">
@@ -43,7 +52,7 @@ const flow = location.state?.flow;
             
           />
 
-          <button type="submit" className="btn-primary btn-lg">
+          <button type="submit" className="btn-primary-auth btn-lg">
             Verify OTP
           </button>
         </form>
@@ -55,8 +64,15 @@ const flow = location.state?.flow;
           </span>
         </p>
       </div>
+      </>
+     ) : (
+    <SuccessModal
+      title="Account Created!"
+      message="Redirecting to login..."
+    />
+  )}
     </div>
-      </div>
+    </div>
   );
 };
 

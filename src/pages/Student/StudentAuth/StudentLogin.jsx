@@ -1,9 +1,8 @@
 import React, { useState, lazy } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
-import "../../css/Teacher/login.css";
-
-const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
+import "../../../css/Teacher/TeacherAuth/login.css";
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
 
 const Login = ({ role }) => {
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const Login = ({ role }) => {
               Forgot Password?
             </span>
 
-            <button type="submit" className="btn-primary btn-lg">
+            <button type="submit" className="btn-primary-auth btn-lg">
               Login
             </button>
 

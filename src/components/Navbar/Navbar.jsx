@@ -7,7 +7,6 @@ function Navbar({ onScroll }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  
   const navItems = [
     { id: "features", label: "Features" },
     { id: "how-it-works", label: "How It Works" },
@@ -16,7 +15,6 @@ function Navbar({ onScroll }) {
     { id: "faq", label: "FAQ" },
   ];
 
- 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
@@ -66,6 +64,7 @@ function Navbar({ onScroll }) {
             ))}
           </div>
 
+          {/* SIMPLIFIED STRUCTURE: All actions in one container in the exact order you want */}
           <div className="nav-actions">
             <button
               className="theme-toggle"
@@ -78,24 +77,25 @@ function Navbar({ onScroll }) {
                 width="20" 
                 height="20" 
               />
-            </button>
+            </button> 
+
             <button className="btn-ghost" onClick={() => navigate("/role-selection")}>
               Login
             </button>
-            <button className="btn-primary" onClick={() => navigate("/role-selection")}>
+            
+            <button className="btn-primary-nav" onClick={() => navigate("/role-selection")}>
               Get Started Free
             </button>
-          </div>
 
-          {/* Burger button - only visible on mobile/tablet */}
-          <button
-            className="burger-btn"
-            onClick={() => setSidebarOpen(true)}
-            aria-label="Open navigation menu"
-            aria-expanded={sidebarOpen}
-          >
-            <img src="/burger.png" alt="Menu" width="24" height="24" />
-          </button>
+            <button
+              className="burger-btn"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={sidebarOpen}
+            >
+              <img src="/burger.png" alt="Menu" width="24" height="24" />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -135,25 +135,7 @@ function Navbar({ onScroll }) {
         </div>
 
         <div className="sidebar-actions">
-          <button
-            className="theme-toggle sidebar-theme-toggle"
-            onClick={toggleTheme}
-            aria-label="Toggle Theme"
-          >
-            <img 
-              src={isDarkMode ? "/sun.png" : "/moon.png"} 
-              alt="Theme Icon" 
-              width="20" 
-              height="20" 
-            />
-            <span>{isDarkMode ? "Light Mode" : "Dark Mode"}</span>
-          </button>
-          <button 
-            className="btn-ghost sidebar-btn" 
-            onClick={() => { navigate("/role-selection"); setSidebarOpen(false); }}
-          >
-            Login
-          </button>
+          
           <button 
             className="btn-primary sidebar-btn" 
             onClick={() => { navigate("/role-selection"); setSidebarOpen(false); }}

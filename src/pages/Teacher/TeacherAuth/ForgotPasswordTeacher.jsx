@@ -1,7 +1,7 @@
 import React, { useState,lazy } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
-import "../../css/Teacher/login.css"
-const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
+import "../../../css/Teacher/TeacherAuth/login.css";
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ const ForgotPassword = () => {
           
           />
 
-          <button className="btn-primary btn-lg" > 
+          <button className="btn-primary-auth btn-lg" > 
             Send OTP
           </button>
         </form>

@@ -1,13 +1,10 @@
 import React, { useState,lazy } from "react";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle } from "lucide-react";
-import "../../css/Teacher/login.css";
-
-const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
+import "../../../css/Teacher/TeacherAuth/login.css";
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
 
 export default function ForgotPassword() {
-  const [identifier, setIdentifier] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [identifier, setIdentifier] = useState("");  
 
   const navigate = useNavigate();
 
@@ -16,7 +13,7 @@ export default function ForgotPassword() {
 
     console.log({ identifier });
 
-    setSubmitted(true);
+  
     navigate("/student/verify-otp");
   };
 
@@ -25,8 +22,7 @@ export default function ForgotPassword() {
     <AuthHeader />
     <div className="login-wrapper">
       <div className="login-card">
-        {!submitted ? (
-          <>
+               
             <div className="forgot-header">
               <h2>Forgot Password</h2>
               <p>
@@ -43,31 +39,12 @@ export default function ForgotPassword() {
           
               />
 
-              <button type="submit" className="btn-primary">
+              <button  className="btn-primary-auth btn-lg">
                 Send Reset Request
               </button>
             </form>
-          </>
-        ) : (
-          <div className="success-container">
-            <CheckCircle size={60} className="success-icon" />
-
-            <h2>Request Sent!</h2>
-
-            <p>
-              Your password reset request has been sent successfully. After the
-              admin approves it, a new temporary password will be sent to your
-              registered email.
-            </p>
-
-            <button
-              className="btn-primary"
-              onClick={() => navigate("/login/student")}
-            >
-              Back to Login
-            </button>
-          </div>
-        )}
+       
+        
       </div>
     </div>
     </div>

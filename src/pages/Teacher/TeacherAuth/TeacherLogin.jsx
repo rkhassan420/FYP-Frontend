@@ -1,20 +1,20 @@
 import React, { useState, lazy } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react"; // Import Lucide icons
-import "../../css/Teacher/login.css";
-const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
+import { Eye, EyeOff } from "lucide-react"; 
+import "../../../css/Teacher/TeacherAuth/login.css";
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
 
 const Login = ({ role }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // State for password visibility
-
+  const [showPassword, setShowPassword] = useState(false); 
+  
   const handleLogin = (e) => {
-    e.preventDefault();
-    // Add your login logic here
+    e.preventDefault();   
 
     navigate("/teacher/dashboard")
+
   };
 
   return (
@@ -57,7 +57,7 @@ const Login = ({ role }) => {
               Forgot Password?
             </span>
 
-            <button type="submit" className="btn-primary btn-lg">
+            <button type="submit" className="btn-primary-auth btn-lg">
               Login
             </button>
           </form>

@@ -1,9 +1,5 @@
-
-/* Security */
-
 .security-section {
   padding: 60px 20px;
-  /* background: #fff; */
   background: var(--surface);
 }
 
@@ -23,7 +19,7 @@
 .security-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 30px;
+  gap: 1.5rem;
 }
 
 .security-item {
@@ -68,3 +64,28 @@
   color: #555;
   line-height: 1.6;
 }
+
+
+.security-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+@media (max-width: 768px) {
+  .security-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+
+@media (max-width: 480px) {
+  .security-grid {
+    grid-template-columns: 1fr; 
+  }
+
+  .security-item {
+    padding: 20px; 
+  }
+} 

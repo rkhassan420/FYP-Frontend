@@ -53,13 +53,6 @@ export const ICONS = {
   "M2 12 12 22"                 // trail line for style
 ],
 
-  maximize: "M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z",
-
- collapse: "M6 9l6 6 6-6",
-
- // Add to your TeacherIcons.js ICONS object:
-moon: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z",
-sun: "M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z",
-
+  collapse: "M6 9l6 6 6-6",
  
 };

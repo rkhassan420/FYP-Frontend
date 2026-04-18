@@ -3,7 +3,7 @@ import "../../css/Teacher/TeacherDashboard.css";
 import Sidebar from "./TeacherSidebar";
 import Header from "./TeacherHeader";
 import { Icon, ICONS } from "../Teacher/TeacherIcons";
-import Evaluator from "./Evaluator";
+import Evaluator from "../../components/Evaluator/Evaluator"
 import TeacherClasses from "../../pages/Teacher/TeacherClasses"
 import AddStudents from "../../pages/Teacher/AddStudents";
 import AssignAssignments from "../../pages/Teacher/AssignAssignment";

@@ -10,17 +10,17 @@ const Error = React.lazy(() => import('./components/Error/Error.jsx'));
 
 const RoleSelection = React.lazy(() => import('./components/RoleSelection/RoleSelection.jsx'));
 
-const TeacherLogin = React.lazy(() => import('./pages/Teacher/TeacherLogin.jsx'));
-const TeacherSignup = React.lazy(() => import('./pages/Teacher/TeacherSignup.jsx'));
-const TeacherOtpVerify = React.lazy(() => import('./pages/Teacher/TeacherOtpVerify.jsx'));
-const ForgotPasswordTeacher = React.lazy(() => import('./pages/Teacher/ForgotPasswordTeacher.jsx'));
-const TeacherSetNewPass = React.lazy(() => import('./pages/Teacher/TeacherSetNewPass.jsx'));
+const TeacherLogin = React.lazy(() => import('./pages/Teacher/TeacherAuth/TeacherLogin.jsx'));
+const TeacherSignup = React.lazy(() => import('./pages/Teacher/TeacherAuth/TeacherSignup.jsx'));
+const TeacherOtpVerify = React.lazy(() => import('./pages/Teacher/TeacherAuth/TeacherOtpVerify.jsx'));
+const ForgotPasswordTeacher = React.lazy(() => import('./pages/Teacher/TeacherAuth/ForgotPasswordTeacher.jsx'));
+const TeacherSetNewPass = React.lazy(() => import('./pages/Teacher/TeacherAuth/TeacherSetNewPass.jsx'));
 
-const StudentSignup = React.lazy(() => import('./pages/Student/StudentSignup.jsx'));
-const StudentLogin = React.lazy(() => import('./pages/Student/StudentLogin.jsx'));
-const StudentPasswordForgot = React.lazy(() => import('./pages/Student/StudentPasswordForgot.jsx'));
-const StudentVerifyOtp = React.lazy(() => import('./pages/Student/StudentVerifyOTP.jsx'));
-const StudentResetPassword = React.lazy(() => import('./pages/Student/StudentResetPassword.jsx'));
+const StudentSignup = React.lazy(() => import('./pages/Student/StudentAuth/StudentSignup.jsx'));
+const StudentLogin = React.lazy(() => import('./pages/Student/StudentAuth/StudentLogin.jsx'));
+const StudentPasswordForgot = React.lazy(() => import('./pages/Student/StudentAuth/StudentPasswordForgot.jsx'));
+const StudentVerifyOtp = React.lazy(() => import('./pages/Student/StudentAuth/StudentVerifyOTP.jsx'));
+const StudentResetPassword = React.lazy(() => import('./pages/Student/StudentAuth/StudentResetPassword.jsx'));
 
 const AdminLogin = React.lazy(() => import('./pages/Admin/AdminLogin.jsx'));
 

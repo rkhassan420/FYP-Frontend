@@ -1,8 +1,8 @@
 import React, { useState, lazy } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react"; // Import Lucide icons
-import "../../css/Teacher/login.css";
-const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
+import { Eye, EyeOff } from "lucide-react"; 
+import "../../../css/Teacher/TeacherAuth/login.css";
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
 
 const TeacherSignup = () => {
   const navigate = useNavigate();
@@ -111,7 +111,7 @@ const TeacherSignup = () => {
               </span>
             </div>
 
-            <button type="submit" className="btn-primary btn-lg">
+            <button type="submit" className="btn-primary-auth btn-lg">
               Create Account
             </button>
           </form>

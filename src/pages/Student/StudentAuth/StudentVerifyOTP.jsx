@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ShieldCheck } from "lucide-react";
-import "../../css/Teacher/login.css"; // Reuse your existing login CSS
+import "../../../css/Teacher/TeacherAuth/login.css";
+const AuthHeader = lazy(() => import("../../../components/AuthHeader/AuthHeader"));
+import SuccessModal from "../../../components/SuccessModal/SuccessModal";
 
 export default function VerifyOTP() {
   const navigate = useNavigate();
@@ -46,6 +48,9 @@ export default function VerifyOTP() {
   };
 
   return (
+     <div>
+    <AuthHeader />
+
     <div className="login-wrapper">
       <div className="login-card">
         <div className="forgot-header">
@@ -60,22 +65,13 @@ export default function VerifyOTP() {
         </div>
 
         <form onSubmit={handleVerify} className="login-form">
-          <div className="otp-input-container" style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
+          <div className="otp-input-container">
             {otp.map((data, index) => (
               <input
                 key={index}
                 type="text"
                 maxLength="1"
-                className="otp-field"
-                style={{
-                  width: '45px',
-                  height: '50px',
-                  textAlign: 'center',
-                  fontSize: '1.2rem',
-                  fontWeight: 'bold',
-                  borderRadius: '8px',
-                  border: '1px solid #e2e8f0'
-                }}
+                className="otp-field"                
                 value={data}
                 onChange={(e) => handleChange(e.target, index)}
                 onFocus={(e) => e.target.select()}
@@ -83,22 +79,23 @@ export default function VerifyOTP() {
             ))}
           </div>
 
-          {error && <p className="error-text" style={{ color: '#ef4444', textAlign: 'center', fontSize: '0.875rem' }}>{error}</p>}
+          {error && <p className="error-text" style={{color:'red'}} >{error}</p>}
 
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="btn-primary-auth btn-lg">
             Verify Code
           </button>
         </form>
 
-        <div className="otp-footer" style={{ textAlign: 'center', marginTop: '20px', fontSize: '0.875rem' }}>
-          <p style={{ color: '#64748b' }}>
+        <div className="otp-footer">
+          <p>
             Didn't receive the code?{" "}
             {timer > 0 ? (
               <span>Resend in {timer}s</span>
             ) : (
               <button 
                 onClick={() => setTimer(59)} 
-                style={{ background: 'none', border: 'none', color: '#4f46e5', cursor: 'pointer', fontWeight: '600' }}
+                className="resend-btn"
+                
               >
                 Resend Now
               </button>
@@ -106,6 +103,7 @@ export default function VerifyOTP() {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

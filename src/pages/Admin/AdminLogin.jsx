@@ -1,7 +1,7 @@
 import React, { useState, lazy } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
-import "../../css/Teacher/login.css";
+import "../../css/Teacher/TeacherAuth/login.css";
 
 const AuthHeader = lazy(() => import("../../components/AuthHeader/AuthHeader"));
 

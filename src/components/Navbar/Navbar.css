@@ -1,4 +1,3 @@
-/* ─── Navbar Base ──────────────────────────────────────── */
 .navbar {
   position: fixed;
   top: 0;
@@ -13,15 +12,14 @@
 }
 
 .navbar-inner {
-  max-width: 1440px; /* Increased from 1200px to push items to the edges on large screens */
+  max-width: 1440px; 
   margin: 0 auto;
-  padding: 1rem 4rem; /* Generous padding for large screens */
+  padding: 1rem 4rem; 
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* ─── Brand ──────────────────────────────────────────── */
 .brand {
   display: flex;
   align-items: center;
@@ -47,7 +45,6 @@
   white-space: nowrap;
 }
 
-/* ─── Desktop Nav Links ──────────────────────────────── */
 .nav-links {
   display: flex;
   align-items: center;
@@ -86,7 +83,25 @@
   width: 100%;
 }
 
-/* ─── Desktop Nav Actions ────────────────────────────── */
+.btn-primary-nav {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.8rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary-nav:hover { 
+  background: var(--blue-dark); 
+  box-shadow: var(--shadow-lg); 
+}
+
+/* --- Container for all right-side buttons --- */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -114,9 +129,9 @@
   transform: scale(0.95);
 }
 
-/* ─── Burger Button ──────────────────────────────────── */
+/* Burger hidden on desktop */
 .burger-btn {
-  display: none;
+  display: none; 
   align-items: center;
   justify-content: center;
   background: transparent;
@@ -131,7 +146,6 @@
   background-color: var(--border, #eaeaea);
 }
 
-/* ─── Sidebar Overlay ────────────────────────────────── */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -147,7 +161,6 @@
   to   { opacity: 1; }
 }
 
-/* ─── Sidebar ────────────────────────────────────────── */
 .sidebar {
   position: fixed;
   top: 0;
@@ -155,14 +168,14 @@
   height: 100%;
   width: min(85vw, 320px);
   background: var(--nav-sidebar-bg, #fff);
-  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.05);
-  border-left: 1px solid var(--border, #eaeaea);
   z-index: 210;
   display: flex;
-  flex-direction: column;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-direction: column; 
+  transform: translateX(100%);  
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);  
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1); 
   overflow-y: auto;
+  will-change: transform; 
 }
 
 .sidebar-open {
@@ -196,7 +209,6 @@
   color: var(--text, #111);
 }
 
-/* ─── Sidebar Links ──────────────────────────────────── */
 .sidebar-links {
   display: flex;
   flex-direction: column;
@@ -221,28 +233,12 @@
   border-left-color: var(--blue, #007bff);
 }
 
-/* ─── Sidebar Actions ────────────────────────────────── */
 .sidebar-actions {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   padding: 1.5rem;
   border-top: 1px solid var(--border, #eaeaea);
-}
-
-.sidebar-theme-toggle {
-  justify-content: flex-start;
-  gap: 12px;
-  border-radius: var(--radius-sm, 8px);
-  padding: 12px;
-  width: 100%;
-  border: 1px solid var(--border, #eaeaea);
-}
-
-.sidebar-theme-toggle span {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text, #333);
 }
 
 .sidebar-btn {
@@ -252,8 +248,8 @@
   justify-content: center;
 }
 
-/* ─── Responsive Breakpoints ─────────────────────────── */
 
+/* --- Media Queries --- */
 
 @media (max-width: 1200px) {
   .navbar-inner {
@@ -267,7 +263,6 @@
   }
 }
 
-
 @media (max-width: 992px) {
   .navbar-inner {
     padding: 1rem 1.5rem; 
@@ -275,23 +270,18 @@
   .nav-links {
     gap: 1.25rem;
   }
-
-  .btn-primary{
-    display: none;
+  .btn-primary-nav {
+     display: none; 
   }
-
   .brand-icon {
-  width: 30px;
-  height: 30px;
+    width: 30px;
+    height: 30px;
   }
-
   .brand-name {
-  font-size: 1rem;
+    font-size: 1rem;
   }
-
   .nav-links a {
     font-size: 0.8rem;
-
   }
 }
 
@@ -307,21 +297,31 @@
     padding: 0.6rem 1.25rem;
   }
 
-  .nav-links,
-  .nav-actions {
+  /* Hide the nav links entirely */
+  .nav-links {
     display: none;
   }
 
+  /* Hide the login and signup buttons, leaving ONLY the toggle */
+  .nav-actions .btn-ghost,
+  .nav-actions .btn-primary-nav {
+    display: none;
+  }
+
+  /* Make the gap between the toggle and burger tighter */
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  /* Reveal the burger button */
   .burger-btn {
     display: flex;
   }
-
   
+  .theme-toggle {
+    padding: 6px;
+  }
 }
-
-
-
-
 
 @media (max-width: 360px) {
   .sidebar {

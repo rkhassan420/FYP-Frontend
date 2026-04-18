@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft } from "lucide-react"; // Lucide icon import
+import { ChevronLeft } from "lucide-react"; 
 import "./AuthHeader.css"
 
 function AuthHeader({ showBack = true }) {
