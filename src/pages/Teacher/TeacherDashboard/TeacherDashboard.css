@@ -1,0 +1,124 @@
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================= LAYOUT ================= */
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0; /* prevents flex children from overflowing */
+}
+
+.content.dashboard {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.content.full {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ================= LOWER GRID → FLEXBOX ================= */
+
+.lower-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: stretch; /* ← children stretch to equal height */
+  width: 100%;
+  flex: 1;              /* ← grow to fill remaining dashboard space */
+  min-height: 0;        /* ← allows flex child to shrink inside overflow container */
+}
+
+/* Recent submissions table — takes 2/3 of the width */
+.lower-grid > :first-child {
+  flex: 2;
+  min-width: 0;
+  height: 100%;         /* ← fill the stretched row height */
+  overflow-y: auto;     /* ← scroll internally if content overflows */
+}
+
+/* Evaluator panel — takes 1/3 of the width */
+.lower-grid > :last-child {
+  flex: 1;
+  min-width: 240px;
+  height: 100%;         /* ← fill the stretched row height */
+  overflow-y: auto;     /* ← scroll internally if content overflows */
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Small Desktops */
+@media (max-width: 1200px) {
+  .lower-grid > :first-child { flex: 1; }
+  .lower-grid > :last-child  { flex: 1; }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .content.dashboard {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  /* Stack vertically — table on top, evaluator below */
+  .lower-grid {
+    flex-direction: column;
+  }
+
+  .lower-grid > :first-child,
+  .lower-grid > :last-child {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .content.dashboard {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .lower-grid {
+    gap: 16px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .content.dashboard {
+    padding: 12px;
+    gap: 12px;
+  }
+}

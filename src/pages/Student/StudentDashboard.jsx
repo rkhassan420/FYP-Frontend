@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../css/Teacher/TeacherDashboard.css"; 
+import "./StudentDashboard.css"; 
 
 import StudentSidebar from "./StudentSidebar";
 import StudentHeader from "./StudentHeader";
@@ -13,8 +13,6 @@ import StudentSetting from "../../pages/Student/StudentSetting";
 
 export default function StudentDashboard() {
   
-  // Removed isFullscreen since the Evaluator tool is only for teachers
-
   const [activePage, setActivePage] = useState(() => {
     return localStorage.getItem("studentActivePage") || "dashboard";
   });

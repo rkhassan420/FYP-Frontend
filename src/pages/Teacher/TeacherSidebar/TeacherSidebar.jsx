@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import { Icon, ICONS } from "../../pages/Teacher/TeacherIcons"; 
+import { Icon, ICONS } from "../TeacherIcons";
 import { useNavigate } from "react-router-dom";
-import "../Teacher/TeacherSidebar/TeacherSidebar.css";
+import "./TeacherSidebar.css";
 
-export default function AdminSidebar({ activePage, setActivePage }) {
+export default function TeacherSidebar({ activePage, setActivePage }) {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
-  // Update state and localStorage simultaneously
-  const handleNavigation = (page) => {
+  const handlePageChange = (page) => {
     setActivePage(page);
-    localStorage.setItem("adminActivePage", page);
+    localStorage.setItem("teacherActivePage", page);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("adminActivePage");
-    navigate("/login/admin"); // Adjust this route to match your admin login page
+    navigate("/login/teacher");
   };
 
   return (
     <aside className={`teacher-sidebar ${collapsed ? "collapsed" : ""}`}>
       
+     
       <div className="teacher-sidebar-header">
         {collapsed ? (
           <div className="teacher-collapsed-logo-wrapper">
@@ -29,7 +28,7 @@ export default function AdminSidebar({ activePage, setActivePage }) {
             </div>
 
             <button
-              className="teacher-expand-btn"
+              className="teacher-collapse-btn teacher-expand-btn"
               onClick={() => setCollapsed(false)}
               title="Expand"
             >
@@ -43,8 +42,12 @@ export default function AdminSidebar({ activePage, setActivePage }) {
             </div>
 
             <div className="teacher-sidebar-title-container">
-              <div className="teacher-sidebar-title">AI Content Evaluator</div>
-              <div className="teacher-sidebar-subtitle">Admin Portal</div>
+              <div className="teacher-sidebar-title">
+                AI Content Evaluator
+              </div>
+              <div className="teacher-sidebar-subtitle">
+                Teacher Portal
+              </div>
             </div>
 
             <button
@@ -58,56 +61,64 @@ export default function AdminSidebar({ activePage, setActivePage }) {
         )}
       </div>
 
+     
       <nav className="teacher-sidebar-nav">
-        <div 
+        <div
           className={`teacher-nav-item ${activePage === "dashboard" ? "active" : ""}`}
-          onClick={() => handleNavigation("dashboard")}
+          onClick={() => handlePageChange("dashboard")}
         >
-          <Icon d={ICONS.dashboard || ICONS.home} size={18} />
+          <Icon d={ICONS.dashboard} size={18} />
           {!collapsed && <span>Dashboard</span>}
         </div>
 
-        <div 
-          className={`teacher-nav-item ${activePage === "add-students" ? "active" : ""}`}
-          onClick={() => handleNavigation("add-students")}
+        <div
+          className={`teacher-nav-item ${activePage === "evaluator" ? "active" : ""}`}
+          onClick={() => handlePageChange("evaluator")}
         >
-          <Icon d={ICONS.users} size={18} />
-          {!collapsed && <span>Manage Students</span>}
+          <Icon d={ICONS.zap} size={18} />
+          {!collapsed && <span>AI Evaluator</span>}
         </div>
 
-        <div 
-          className={`teacher-nav-item ${activePage === "teacher-manage" ? "active" : ""}`}
-          onClick={() => handleNavigation("teacher-manage")}
+        <div
+          className={`teacher-nav-item ${activePage === "create-classes" ? "active" : ""}`}
+          onClick={() => handlePageChange("create-classes")}
         >
-          <Icon d={ICONS.users} size={18} />
-          {!collapsed && <span>Manage Teacher</span>}
+          <Icon d={ICONS.bookOpen} size={18} />
+          {!collapsed && <span>Classes</span>}
         </div>
 
-        {/* <div 
-          className={`teacher-nav-item ${activePage === "configure-rules" ? "active" : ""}`}
-          onClick={() => handleNavigation("configure-rules")}
+        <div
+          className={`teacher-nav-item ${activePage === "students" ? "active" : ""}`}
+          onClick={() => handlePageChange("students")}
         >
-          
-          <Icon d={ICONS.sliders || ICONS.settings} size={18} /> 
-          {!collapsed && <span>Configure Rules</span>}
-        </div> */}
+          <Icon d={ICONS.users} size={18} />
+          {!collapsed && <span>Students</span>}
+        </div>
 
-        {/* <div 
+        <div
+          className={`teacher-nav-item ${activePage === "assignments" ? "active" : ""}`}
+          onClick={() => handlePageChange("assignments")}
+        >
+          <Icon d={ICONS.fileText} size={18} />
+          {!collapsed && <span>Assignments</span>}
+        </div>
+
+        <div
           className={`teacher-nav-item ${activePage === "setting" ? "active" : ""}`}
-          onClick={() => handleNavigation("setting")}
+          onClick={() => handlePageChange("setting")}
         >
           <Icon d={ICONS.settings} size={18} />
           {!collapsed && <span>Settings</span>}
-        </div> */}
+        </div>
       </nav>
 
+      {/* FOOTER */}
       <div className="teacher-sidebar-footer">
         <div className="teacher-nav-item logout" onClick={handleLogout}>
-          <Icon d={ICONS.logOut || ICONS.logout} size={18} />
+          <Icon d={ICONS.logOut} size={18} />
           {!collapsed && <span>Logout</span>}
         </div>
       </div>
-      
     </aside>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/Teacher/TeacherHeader.css";
+import "../Teacher/Teacherheader/TeacherHeader.css";
 // Reusing your existing icons
 import { Icon, ICONS } from "../Teacher/TeacherIcons"; 
 

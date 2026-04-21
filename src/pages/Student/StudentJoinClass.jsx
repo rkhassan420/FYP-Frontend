@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Zap, CheckCircle, Loader2 } from "lucide-react";
-import "../../css/Teacher/AddStudents.css";
+import "../Teacher/TeacherAddStudent/AddStudents.css";
 
 export default function JoinClass() {
   const navigate = useNavigate(); 

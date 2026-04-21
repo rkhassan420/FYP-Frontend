@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { 
   Search, Upload, Send, Check, BookOpen, Eye, Edit2, Trash2, X, ChevronDown, AlertCircle, FileText, Download
 } from "lucide-react";
-import "../../css/Teacher/AssignAssignments.css";
+import "./AssignAssignments.css";
 
 // ── MATCHING CLASSES ───────────────────────────────────────────────────────
 const CLASS_OPTIONS = [

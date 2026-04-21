@@ -1,0 +1,218 @@
+/* StudentDashboard.css */
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Layout ── */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.content.dashboard {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.content.full {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* ← fixed */
+  padding: 0;
+}
+
+/* ── Stats Grid ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-blue   { background: #eff6ff; color: #3b82f6; }
+.icon-orange { background: #fff7ed; color: #f97316; }
+.icon-green  { background: #f0fdf4; color: #22c55e; }
+.icon-purple { background: #faf5ff; color: #a855f7; }
+
+/* ── Lower Grid ── */
+/* .lower-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+  flex: 1;
+  min-height: 0; 
+} */
+
+/* .lower-grid > :first-child { flex: 2; min-width: 0; }
+.lower-grid > :last-child  { flex: 1; min-width: 240px; } */
+
+/* ── Panel Card ── */
+/* .panel-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; 
+} */
+
+/* ── Lower Grid ── */
+.lower-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  /* Remove: flex: 1, min-height: 0, align-items: stretch */
+  align-items: flex-start; /* ← cards only grow as tall as their content */
+}
+
+.lower-grid > :first-child { flex: 2; min-width: 0; }
+.lower-grid > :last-child  { flex: 1; min-width: 240px; }
+
+/* ── Panel Card ── */
+.panel-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  /* Remove: overflow: hidden, height: 100% */
+}
+
+.table-wrapper {
+  /* Remove: flex: 1, overflow-y: auto */
+}
+
+.panel-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* .table-wrapper {
+  flex: 1;
+  overflow-y: auto; 
+} */
+
+/* ── Table ── */
+.submissions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.submissions-table thead th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f9fafb;
+  position: sticky;
+  top: 0;
+}
+
+.submissions-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+
+.student-name { font-weight: 500; color: #111827; }
+.score { font-weight: 600; }
+
+.action-btn {
+  padding: 5px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.action-btn:hover { opacity: 0.8; }
+.action-btn.review { background: #eff6ff; color: #3b82f6; }
+.action-btn.view   { background: #f0fdf4; color: #16a34a; }
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .content.dashboard { padding: 24px; gap: 24px; }
+  .lower-grid { flex-direction: column; }
+  .lower-grid > :first-child,
+  .lower-grid > :last-child { flex: none; width: 100%; min-width: 0; }
+}
+
+@media (max-width: 768px) {
+  .content.dashboard { padding: 16px; gap: 16px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .content.dashboard { padding: 12px; gap: 12px; }
+  .stats-grid { grid-template-columns: 1fr; }
+}

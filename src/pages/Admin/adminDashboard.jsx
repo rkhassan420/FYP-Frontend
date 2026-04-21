@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import "../../css/Teacher/TeacherDashboard.css"; 
+import "../Student/StudentDashboard.css"; 
 import AdminSidebar from "./AdminSidebar";
 import AdminHeader from "./AdminHeader";
 import { Icon, ICONS } from "../../pages/Teacher/TeacherIcons"; // Assuming you have an icons file
 import AdminAddStudents from '../../pages/Admin/AdminAddStudents';
 import AdminTeacherManagement from '../../pages/Admin/AdminTeacherManagement';
-// import UserManagement from "../../pages/Admin/UserManagement";
-// import SystemReports from "../../pages/Admin/SystemReports";
-// import ConfigureRules from "../../pages/Admin/ConfigureRules";
-// import AdminSetting from "../../pages/Admin/AdminSetting";
+
 
 export default function AdminDashboard() {
   

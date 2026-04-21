@@ -43,8 +43,8 @@ function Roles() {
       cta: "Continue as Student →",
     },
     {
-      icon: <GuestUserIcon/>, title: "Guest", route: "/teacher/dashboard", color: "role-purple", btn: "btn-role-purple",
-      desc: "Manage users, configure system settings, monitor platform usage, and oversee the entire evaluation workflow.",
+      icon: <GuestUserIcon/>, title: "Guest", route: "/guest/login", color: "role-purple", btn: "btn-role-purple",
+      desc: "A guest user logs in to the platform and uses the AI evaluator to assess submissions or deliverables, without access to administrative controls or system-wide settings..",
       cta: "Continue as Guest →",
     },
   ];

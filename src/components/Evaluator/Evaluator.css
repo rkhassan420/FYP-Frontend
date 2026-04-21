@@ -1,12 +1,9 @@
-
-/* ─── AI Panel ─── */
-.evaluator-card {
+/* .evaluator-card {
   display: flex;
   flex-direction: column;
   max-height: 100%;
   padding: 0;
-  overflow: hidden;
-  
+  overflow: hidden;  
 }
 
 .evaluator-topbar {
@@ -46,19 +43,18 @@
   color: #6b7280;
 }
 
-/* Maximize button */
 .maximize-btn {
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease-in-out;
-  color: #4a4a4a; /* Optional: icon color */
+  color: #4a4a4a; 
 }
 
 .maximize-btn:hover {
-  transform: scale(1.3); /* Increase size on hover */
-  color: #1a73e8; /* Optional: change color on hover */
+  transform: scale(1.3);
+  color: #1a73e8; 
 }
 
 .chat-scroll-area {
@@ -163,18 +159,12 @@
   
 }
 
-.chat-input-box {
-  /* border: 1px solid #d1d5db; */
+.chat-input-box {  
   border-radius: 18px;
   background: #fff;
   padding: 10px;
   transition: all 0.2s ease;
 }
-
-/* .chat-input-box:focus-within {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 4px rgba(59,130,246,0.12);
-} */
 
 .chatgpt-input {
   width: 100%;
@@ -235,17 +225,268 @@
 
 
 .evaluator-card.fullscreen {
-  position: fixed; /* takes the div out of normal flow */
+  position: fixed; 
   top: 0;
   left: 0;
-  width: 100vw; /* full viewport width */
-  height: 100vh; /* full viewport height */
-  z-index: 9999; /* on top of everything */
-  border-radius: 0; /* remove any rounded corners */  
-  background: #fff; /* make sure it’s visible */
-  box-shadow: none; /* remove shadow if any */
+  width: 100vw; 
+  height: 100vh; 
+  z-index: 9999; 
+  border-radius: 0;  
+  background: #fff; 
+  box-shadow: none; 
 }
 
 .evaluator-card {
   transition: all 0.4s ease;
+}
+ */
+
+
+ /* 1. Added a global reset to ensure the page itself allows full height */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Updated Evaluator Card to force full Dynamic Viewport Height (dvh) */
+.evaluator-card {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh; /* Changed from max-height: 100% */
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  background: #fff; /* Added background so it's not transparent */
+}
+
+/* 3. Updated Fullscreen mode to also use dvh */
+.evaluator-card.fullscreen {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100dvh; /* Changed from 100vh to 100dvh for mobile support */
+  z-index: 9999; 
+  border-radius: 0;  
+  background: #fff; 
+  box-shadow: none; 
+}
+
+/* ─── REST OF YOUR CSS (UNCHANGED) ─── */
+
+.evaluator-topbar {
+  padding: 17px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.evaluator-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.evaluator-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #dbeafe;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.evaluator-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.evaluator-subtitle {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.maximize-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+  color: #4a4a4a; 
+}
+
+.maximize-btn:hover {
+  transform: scale(1.3);
+  color: #1a73e8; 
+}
+
+.chat-scroll-area {
+  flex: 1; /* Because parent is now 100dvh, this will correctly push the input to the bottom */
+  overflow-y: auto;
+  padding: 20px;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+}
+
+.chat-row {
+  display: flex;
+}
+
+.chat-row.user {
+  justify-content: flex-end;
+}
+
+.chat-row.assistant {
+  justify-content: flex-start;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  animation: fade-in-up 0.25s ease;
+}
+
+.chat-bubble.user {
+  background: #3b82f6;
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+
+.chat-bubble.assistant {
+  background: #fff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.message-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.message-file {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  font-size: 12px;
+}
+
+.chat-bubble.assistant .message-file {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+}
+
+.typing-bubble span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typing-bubble span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-bubble span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.chat-input-wrapper {
+  padding: 5px;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.chat-input-box {  
+  border-radius: 18px;
+  background: #fff;
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+
+.chatgpt-input {
+  width: 100%;
+  min-height: 24px; /* Fixed missing value from 'min-height: px' */
+  max-height: 120px;
+  overflow-y: auto;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: #111827;
+  line-height: 1.6;
+}
+
+.chat-input-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #374151;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.upload-chip:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #2563eb;
+}
+
+.send-btn {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #2563eb;
 }

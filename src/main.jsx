@@ -22,15 +22,26 @@ const StudentPasswordForgot = React.lazy(() => import('./pages/Student/StudentAu
 const StudentVerifyOtp = React.lazy(() => import('./pages/Student/StudentAuth/StudentVerifyOTP.jsx'));
 const StudentResetPassword = React.lazy(() => import('./pages/Student/StudentAuth/StudentResetPassword.jsx'));
 
+const GuestLogin = React.lazy(() => import('./pages/Guest/GuestLogin.jsx'));
+const GuestSignup = React.lazy(() => import('./pages/Guest/GuestSignup.jsx'));
+const GuesForgotPassword = React.lazy(() => import('./pages/Guest/GuestForgotPassword.jsx'));
+const GuestVerifyOtp = React.lazy(() => import('./pages/Guest/GuestVerifyOTP.jsx'));
+const GuestResetPass = React.lazy(() => import('./pages/Guest/GuestResetPassword.jsx'));
+
 const AdminLogin = React.lazy(() => import('./pages/Admin/AdminLogin.jsx'));
 
 
-const TeacherDashboard = React.lazy(() => import('./pages/Teacher/TeacherDashboard.jsx'));
-const AssignAssignment = React.lazy(() => import('./pages/Teacher/AssignAssignment.jsx'));
+const TeacherDashboard = React.lazy(() => import('./pages/Teacher/TeacherDashboard/TeacherDashboard.jsx'));
+const AssignAssignment = React.lazy(() => import('./pages/Teacher/TeacherManageAssignment/AssignAssignment.jsx'));
+
 
 const StudentDashboard = React.lazy(() => import('./pages/Student/StudentDashboard.jsx'));
 
+
 const AdminDashboard = React.lazy(() => import('./pages/Admin/adminDashboard.jsx'));
+
+
+const GuestDashboard = React.lazy(() => import('./pages/Guest/GuestDashboard.jsx'));
 
 
 
@@ -128,6 +139,37 @@ const router = createBrowserRouter([
     element:<AdminDashboard />
   },
 
+
+
+   {
+    path:"/guest/login",
+    element:<GuestLogin />
+  },
+
+   {
+    path:"/guest/signup",
+    element:<GuestSignup />
+  },
+
+   {
+    path:"/guest/forgot-pass",
+    element:<GuesForgotPassword />
+  },
+
+   {
+    path:"/guest/verify-otp",
+    element:<GuestVerifyOtp />
+  },
+
+   {
+    path:"/guest/reset-password",
+    element:<GuestResetPass />
+  },
+
+  {
+    path:"/guest/dashboard",
+    element:<GuestDashboard />
+  },
 
    
 ]);

@@ -1,0 +1,131 @@
+.header {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+/* LEFT AREA */
+.header-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.header-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ACTIONS */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* THEME BUTTON */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  background: transparent;
+  border: none;
+
+  padding: 8px;
+  border-radius: 50%;
+
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: #e5e7eb;
+  transform: scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* AVATAR */
+.avatar {
+  width: 36px;
+  height: 36px;
+
+  background: linear-gradient(135deg, #34d399, #3b82f6);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+
+  flex-shrink: 0;
+}
+
+/* =========================
+   📱 RESPONSIVE BREAKPOINTS
+   ========================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .header {
+    padding: 14px 16px;
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+  }
+
+  .header-actions {
+    gap: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .header {
+    flex-direction: row; /* IMPORTANT: no stacking chaos */
+    align-items: center;
+    padding: 12px 12px;
+  }
+
+  .header-text {
+    min-width: 0;
+  }
+
+  .header-subtitle {
+    font-size: 12px;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .theme-toggle {
+    padding: 5px;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+}

@@ -64,7 +64,7 @@ function Navbar({ onScroll }) {
             ))}
           </div>
 
-          {/* SIMPLIFIED STRUCTURE: All actions in one container in the exact order you want */}
+         
           <div className="nav-actions">
             <button
               className="theme-toggle"
@@ -135,10 +135,15 @@ function Navbar({ onScroll }) {
         </div>
 
         <div className="sidebar-actions">
+
+          
+            <button className="btn-ghost" onClick={() => navigate("/role-selection")}>
+              Login
+            </button>
           
           <button 
             className="btn-primary sidebar-btn" 
-            onClick={() => { navigate("/role-selection"); setSidebarOpen(false); }}
+            onClick={() => { navigate("/guest/login"); setSidebarOpen(false); }}
           >
             Get Started Free
           </button>

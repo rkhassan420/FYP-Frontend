@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 // Reusing your existing CSS for a consistent Admin experience!
-import "../../css/Teacher/AddStudents.css"; 
+import "../Teacher/TeacherAddStudent/AddStudents.css"; 
 
 // Helper function to generate a strong 8-character password
 function generatePassword() {

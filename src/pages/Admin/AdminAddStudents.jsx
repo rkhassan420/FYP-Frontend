@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 // You can reuse the exact same CSS file to keep the styling consistent!
-import "../../css/Teacher/AddStudents.css"; 
+import "../Teacher/TeacherAddStudent/AddStudents.css"; 
 
 // Helper function to generate a strong 8-character password
 function generatePassword() {

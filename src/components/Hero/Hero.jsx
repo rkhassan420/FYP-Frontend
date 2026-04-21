@@ -64,10 +64,10 @@ function Hero() {
         <h1 className="hero-title fade-up stagger-1">AI Content Evaluator</h1>
         <p className="hero-subtitle fade-up stagger-2">Smart Academic Evaluation System Powered by AI</p>
         <div className="hero-cta fade-up stagger-3">
-          <button className="btn-primary btn-lg" onClick={() => navigate("/role-selection")} >Get Started Free →</button>
-          <button className="btn-outline btn-lg"  >
+          <button className="btn-primary btn-lg" onClick={() => navigate("/guest/login")} >Get Started Free →</button>
+          {/* <button className="btn-outline btn-lg"  >
             <LogInIcon /> Try Demo
-          </button>
+          </button> */}
           
         </div>
 

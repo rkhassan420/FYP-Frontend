@@ -1,22 +1,8 @@
 import React, { useState, useRef } from "react";
-import "../../css/Teacher/AddStudents.css";
-
-// Mock Assignment History Generator
-function getMockAssignments(studentName) {
-  return [
-    { id: 101, title: "Algebra Worksheet 1", dueDate: "Apr 10, 2026 - 23:59", submittedDate: "Apr 09, 2026 - 14:30", status: "Submitted", grade: "A", file: "algebra_ws1.pdf" },
-    { id: 102, title: "Science Lab Report", dueDate: "Apr 12, 2026 - 17:00", submittedDate: "Apr 12, 2026 - 16:45", status: "Submitted", grade: "Pending", file: "lab_report_final.docx" },
-    { id: 103, title: "History Essay Draft", dueDate: "Apr 15, 2026 - 23:59", submittedDate: null, status: "Pending", grade: "-", file: null },
-    { id: 104, title: "Literature Review", dueDate: "Apr 20, 2026 - 23:59", submittedDate: null, status: "Pending", grade: "-", file: null },
-  ];
-}
-
-const INITIAL_STUDENTS = [
-  { id: 1, name: "John Smith", studentId: "STU20250001", email: "john.smith@email.com", contact: "+1234567890", className: "CHEM101", shift: "Morning", session: "2025-26", color: "blue", initials: "JS" },
-  { id: 2, name: "Sarah Anderson", studentId: "STU20250002", email: "sarah.anderson@email.com", contact: "+1987654321", className: "ENG201", shift: "Evening", session: "2025-26", color: "purple", initials: "SA" },
-  { id: 3, name: "Michael Brown", studentId: "STU20250003", email: "michael.brown@email.com", contact: "+1122334455", className: "BIO101", shift: "Morning", session: "2025-26", color: "emerald", initials: "MB" },
-  { id: 4, name: "Emma Johnson", studentId: "STU20250004", email: "emma.johnson@email.com", contact: "+1555666777", className: "CHEM101", shift: "Evening", session: "2025-26", color: "amber", initials: "EJ" },
-];
+import "./AddStudents.css";
+import DeleteModal from "./DeleteModal";
+import { ViewStudentModal } from "./ViewStudentModal";
+import { StudentList, INITIAL_STUDENTS } from "./StudentList";
 
 const COLOR_MAP = {
   blue: { bg: "#dbeafe", text: "#1d4ed8" },
@@ -101,8 +87,7 @@ export default function AddStudents() {
   const [students, setStudents] = useState(INITIAL_STUDENTS);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
-  const [form, setForm] = useState({ name: "", studentId: "", email: "", contact: "", className: "", shift: "", session: "" });
-  
+  const [form, setForm] = useState({ name: "", studentId: "", email: "", contact: "", className: "", shift: "", session: "" });  
   const [addState, setAddState] = useState("idle"); 
   const [deletingIds, setDeletingIds] = useState(new Set());
   const [editingId, setEditingId] = useState(null);
@@ -330,148 +315,44 @@ export default function AddStudents() {
               </button>
             )}
           </div>
-        </div>
+        </div>      
 
-        <div className="table-section fade-in">
-          <div className="table-header-row">
-            <h3 className="section-title" style={{ margin: 0 }}>Total Students ({filtered.length})</h3>
-          </div>
-          <div className="table-card">
-            <div className="table-responsive">
-              <table className="students-table">
-                <thead>
-                  <tr>
-                    <th>Student Name</th>
-                    <th>Student ID</th>
-                    <th>Email</th>
-                    <th>Contact Number</th>
-                    <th className="align-center">Class</th>
-                    <th className="align-center">Shift</th>
-                    <th className="align-center">Session</th>
-                    <th className="text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.length === 0 ? (
-                    <tr>
-                      <td colSpan={8} className="empty-state">No students found.</td>
-                    </tr>
-                  ) : (
-                    filtered.map((student, i) => (
-                      <tr
-                        key={student.id}
-                        className={`student-row ${deletingIds.has(student.id) ? "deleting" : ""}`}
-                        style={{ animationDelay: `${i * 0.08}s` }}
-                      >
-                        <td>
-                          <div className="student-name-cell">
-                            <Avatar name={student.name} color={student.color} />
-                            <span className="student-name">{student.name}</span>
-                          </div>
-                        </td>
-                        <td><span className="student-id">{student.studentId}</span></td>
-                        <td><span className="student-email">{student.email}</span></td>
-                        <td><span className="student-contact">{student.contact}</span></td>
-                        <td className="align-center">
-                          <div className="badge-wrapper"><Badge type="class">{student.className}</Badge></div>
-                        </td>
-                        <td className="align-center">
-                          <div className="badge-wrapper"><Badge type="shift">{student.shift}</Badge></div>
-                        </td>
-                        <td className="align-center">
-                          <div className="badge-wrapper"><Badge type="session">{student.session}</Badge></div>
-                        </td>
-                        <td>
-                          <div className="actions-cell">
-                            <IconButton variant="view" title="View student" onClick={() => handleViewClick(student)}><EyeIcon /></IconButton>
-                            <IconButton variant="edit" title="Edit student" onClick={() => handleEdit(student)}><EditIcon /></IconButton>
-                            <IconButton variant="delete" title="Delete student" onClick={() => handleDeleteClick(student.id)}><TrashIcon /></IconButton>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
 
-        {/* View Student Modal */}
-        {studentToView && (
-          <div className={`modal-overlay ${isClosingView ? 'closing' : ''}`} onClick={closeViewModal}>
-            <div className={`card modal-card modal-card-large ${isClosingView ? 'closing' : ''}`} onClick={(e) => e.stopPropagation()}>
-              <div className="modal-header-custom">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <Avatar name={studentToView.name} color={studentToView.color} />
-                  <div>
-                    <h3 className="modal-title" style={{ margin: 0, fontSize: '1.5rem' }}>{studentToView.name}</h3>
-                    <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>{studentToView.studentId}</p>
-                  </div>
-                </div>
-                <button className="icon-btn" onClick={closeViewModal}><CloseIcon /></button>
-              </div>
-              <div className="modal-body-custom">
-                <h4 className="section-title" style={{ marginBottom: '16px' }}>Assignment History</h4>
-                <div className="table-card">
-                  <div className="table-responsive">
-                    <table className="students-table">
-                      <thead>
-                        <tr>
-                          <th>Assignment Title</th>
-                          <th>Due Date</th>
-                          <th>Submitted Date</th>
-                          <th>Status</th>
-                          <th>Grade</th>
-                          <th className="text-right">File</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {getMockAssignments(studentToView.name).map((assignment) => (
-                          <tr key={assignment.id}>
-                            <td style={{ fontWeight: '500', color: 'var(--text-main)' }}>{assignment.title}</td>
-                            <td style={{ color: 'var(--text-muted)' }}>{assignment.dueDate}</td>
-                            <td style={{ color: 'var(--text-muted)' }}>{assignment.submittedDate || "—"}</td>
-                            <td><Badge type={assignment.status.toLowerCase()}>{assignment.status}</Badge></td>
-                            <td style={{ fontWeight: '700', color: 'var(--text-main)' }}>{assignment.grade}</td>
-                            <td className="text-right">
-                              {assignment.file ? (
-                                <a href="#" className="file-download-btn" title={`Download ${assignment.file}`} onClick={(e) => { e.preventDefault(); alert(`Downloading: ${assignment.file}`); }}><DownloadIcon /></a>
-                              ) : (
-                                <span style={{ color: 'var(--text-light)', paddingRight: '12px' }}>—</span>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        )}
+        <StudentList
+          students={filtered}
+          deletingIds={deletingIds}
+          onView={handleViewClick}
+          onEdit={handleEdit}
+          onDelete={handleDeleteClick}
+          Avatar={Avatar}
+          Badge={Badge}
+          IconButton={IconButton}
+          EyeIcon={EyeIcon}
+          EditIcon={EditIcon}
+          TrashIcon={TrashIcon}
+        />       
 
-        {/* Delete Modal */}
-        {studentToDelete !== null && (
-          <div className={`modal-overlay ${isClosingDelete ? 'closing' : ''}`}>
-            <div className={`card modal-card ${isClosingDelete ? 'closing' : ''}`}>
-              <div className="modal-icon-wrapper">
-                <svg className="modal-icon-svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-                </svg>
-              </div>
-              <h3 className="modal-title">Delete Student?</h3>
-              <p className="modal-desc">Are you sure you want to remove this student? This action cannot be undone.</p>
-              <div className="modal-buttons">
-                <button className="modal-btn-cancel" onClick={closeDeleteModal}>Cancel</button>
-                <button className="modal-btn-delete" onClick={confirmDelete}>Yes, Delete</button>
-              </div>
-            </div>
-          </div>
-        )}
+
+        <ViewStudentModal 
+          student={studentToView}
+          isClosing={isClosingView}
+          onClose={closeViewModal}        
+          Avatar={Avatar}
+          Badge={Badge}
+          CloseIcon={CloseIcon}
+          DownloadIcon={DownloadIcon}
+        />
+
+        <DeleteModal 
+          isOpen={studentToDelete !== null}
+          isClosing={isClosingDelete}
+          onClose={closeDeleteModal}
+          onConfirm={confirmDelete}
+        />
+        
+       
       </div>
     </div>
   );
 }
+
