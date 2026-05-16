@@ -1,0 +1,53 @@
+.success-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;  
+  background: var(--gradient-primary);
+}
+
+.success-modal {
+  background: var(--surface);
+  padding: 2rem 2.5rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 450px;
+  max-height: 350px;
+  animation: scaleIn 0.3s ease;
+
+
+}
+
+.success-icon {
+  color: var(--green);
+  margin-bottom: 15px;
+  animation: pop 0.4s ease;
+}
+
+.success-modal h2 {
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.success-modal p {
+  color: var(--muted);
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+

@@ -1,0 +1,156 @@
+.trs-panel-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.trs-panel-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.trs-panel-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+/* ===== TABLE WRAPPER ===== */
+
+.trs-table-wrapper {  
+  width: 100%;  
+  max-height: 510px;
+  border-radius: var(--radius-md);
+  -webkit-overflow-scrolling: touch; 
+}
+
+/* ===== EMPTY STATE ===== */
+
+.trs-empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+  text-align: center;
+
+  color: var(--muted);
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  background: var(--light-bg);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border);
+}
+
+/* ===== TABLE ===== */
+
+.trs-submissions-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+/* HEADER */
+.trs-submissions-table thead tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.trs-submissions-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em; 
+  white-space: nowrap; 
+}
+
+/* BODY */
+.trs-submissions-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  white-space: nowrap; 
+}
+
+/* ROW HOVER */
+.trs-submissions-table tr:hover td {
+  background: var(--highlight-bg);
+}
+
+/* ===== TEXT ===== */
+
+.trs-student-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.trs-score {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ===== BADGES ===== */
+
+.trs-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* status colors mapped to theme variables */
+.trs-badge-submitted {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+.trs-badge-pending {
+  background: var(--amber-light);
+  color: var(--amber);
+}
+
+.trs-badge-reviewed {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+/* ===== ACTION BUTTONS ===== */
+
+.trs-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+/* review */
+.trs-action-btn.trs-review {
+  color: var(--blue);
+}
+
+.trs-action-btn.trs-review:hover {
+  color: var(--blue-dark);
+}
+
+/* view */
+.trs-action-btn.trs-view {
+  color: var(--muted);
+}
+
+.trs-action-btn.trs-view:hover {
+  color: var(--text);
+}

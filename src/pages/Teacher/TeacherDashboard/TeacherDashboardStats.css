@@ -1,0 +1,151 @@
+/* =========================
+   📊 STATS GRID RESPONSIVE
+   ========================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ===== CARD ===== */
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  cursor: default;
+
+  opacity: 0;
+  animation: fade-in-up 0.6s ease-out forwards;
+
+  transition: box-shadow 0.25s, transform 0.25s, background 0.25s;
+}
+
+/* hover adapted for both themes */
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Animation delay */
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* ===== TEXT ===== */
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 8px;
+}
+
+/* ===== ICON ===== */
+.stat-icon {
+  width: 48px;
+  height: 48px;
+
+  border-radius: var(--radius-md);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+/* ===== ICON COLORS (LIGHT MODE BASED) ===== */
+.icon-blue {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+.icon-green {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.icon-purple {
+  background: var(--purple-light);
+  color: var(--purple);
+}
+
+.icon-orange {
+  background: var(--amber-light);
+  color: var(--amber);
+}
+/* =========================
+   📱 RESPONSIVE BREAKPOINTS
+   ========================= */
+
+/* Large tablets */
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .stat-card {
+    padding: 20px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+  .stat-value {
+    font-size: 26px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .stat-icon {
+    width: 42px;
+    height: 42px;
+  }
+}

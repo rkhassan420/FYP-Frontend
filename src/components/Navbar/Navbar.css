@@ -1,0 +1,331 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background: var(--nav-bg, rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border, #eaeaea);
+  transition: background-color 0.3s ease;
+}
+
+.navbar-inner {
+  max-width: 1440px; 
+  margin: 0 auto;
+  padding: 1rem 4rem; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  outline: none;
+}
+
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm, 8px);
+  /* background: linear-gradient(135deg, var(--blue, #007bff), var(--purple, #6f42c1)); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-name {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text, #333);
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+  transition: color 0.2s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+.nav-links a:hover, 
+.nav-links a:focus-visible {
+  color: var(--text, #111);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--blue-hover, #0056b3);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  width: 100%;
+}
+
+.btn-primary-nav {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.8rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary-nav:hover { 
+  background: var(--blue-dark); 
+  box-shadow: var(--shadow-lg); 
+}
+
+/* --- Container for all right-side buttons --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--border, #eaeaea);
+  transform: scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Burger hidden on desktop */
+.burger-btn {
+  display: none; 
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.burger-btn:hover {
+  background-color: var(--border, #eaeaea);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 98;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(85vw, 320px);
+  background: var(--nav-sidebar-bg, #fff);
+  z-index: 210;
+  display: flex;
+  flex-direction: column; 
+  transform: translateX(100%);  
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);  
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1); 
+  overflow-y: auto;
+  will-change: transform; 
+}
+
+.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border, #eaeaea);
+}
+
+.sidebar-close {
+  border: none;
+  width: 37px;
+  height: 37px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary, #666);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.sidebar-close:hover {
+  background-color: var(--border, #eaeaea);
+  color: var(--text, #111);
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  flex: 1;
+}
+
+.sidebar-links a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-links a:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  color: var(--text, #111);
+  border-left-color: var(--blue, #007bff);
+}
+
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border, #eaeaea);
+}
+
+.sidebar-btn {
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  justify-content: center;
+}
+
+
+/* --- Media Queries --- */
+
+@media (max-width: 1200px) {
+  .navbar-inner {
+    padding: 1rem 2.5rem; 
+  }
+}
+
+@media (max-width: 1050px) {
+  .navbar-inner {
+    padding: 1rem 2rem; 
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-inner {
+    padding: 1rem 1.5rem; 
+  }
+  .nav-links {
+    gap: 1.25rem;
+  }
+  .btn-primary-nav {
+     display: none; 
+  }
+  .brand-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .brand-name {
+    font-size: 1rem;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar,
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-inner {
+    padding: 0.6rem 1.25rem;
+  }
+
+  /* Hide the nav links entirely */
+  .nav-links {
+    display: none;
+  }
+
+  /* Hide the login and signup buttons, leaving ONLY the toggle */
+  .nav-actions .btn-ghost,
+  .nav-actions .btn-primary-nav {
+    display: none;
+  }
+
+  /* Make the gap between the toggle and burger tighter */
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  /* Reveal the burger button */
+  .burger-btn {
+    display: flex;
+  }
+  
+  .theme-toggle {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sidebar {
+    width: 100%;
+    border-left: none;
+  }
+}

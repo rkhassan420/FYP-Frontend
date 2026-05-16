@@ -1,0 +1,828 @@
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rowOut {
+  to   { opacity: 0; transform: translateX(20px); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.fade-in {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+/* =========================================
+   3. Page Layout & Typography
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+.page-wrapper {
+  width: 100%;
+  height: 100vh;
+  padding: 24px 32px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--teacher-portal-bg);
+}
+
+.page-inner {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ================= HEADER ================= */
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1.25rem; /* FIXED (was 0.5rem ❌) */
+}
+
+.page-subtitle {
+  margin-top: 4px;
+  font-size: 0.875rem; /* FIXED (was 0.2rem ❌) */
+  color: var(--muted);
+}
+
+/* =========================================
+   CARDS & CONTAINERS
+========================================= */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 32px;
+}
+
+.card-title,
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 24px 0;
+}
+
+/* =========================================
+   GRIDS & FORMS
+========================================= */
+
+.top-row,
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px 24px;
+}
+
+.top-row {
+  margin-bottom: 32px;
+}
+
+.form-grid {
+  margin-bottom: 24px;
+}
+
+.form-row-split {
+  display: flex;
+  gap: 16px;
+}
+
+.form-col-half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.input-field {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text);
+  background: var(--surface);
+  width: 100%;
+  transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.input-field::placeholder {
+  color: var(--subtle);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.input-field:disabled {
+  background: var(--light-bg);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* SELECT */
+
+select.input-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+/* SEARCH */
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--subtle);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.search-input {
+  padding-left: 42px;
+}
+
+/* ERROR */
+
+.form-error-message {
+  color: var(--pink);
+  font-size: 0.875rem;
+  margin: 0 0 1rem 0;
+  grid-column: 1 / -1;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* PRIMARY */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: var(--text-white);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* SECONDARY */
+
+.btn-secondary-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-secondary-outline:hover {
+  background: var(--light-bg);
+  border-color: var(--muted);
+}
+
+/* ICON BUTTONS */
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  transform: scale(1.08);
+  background: red;
+  color: white;
+}
+
+/* VARIANTS */
+
+.icon-btn-view {
+  background: var(--green-light);
+  color: var(--green);
+}
+.icon-btn-view:hover {
+  background: var(--green-mid);
+}
+
+.icon-btn-edit {
+  background: var(--amber-light);
+  color: var(--amber);
+}
+.icon-btn-edit:hover {
+  background: var(--amber-mid);
+}
+
+.icon-btn-delete {
+  background: var(--pink-light);
+  color: var(--pink);
+}
+.icon-btn-delete:hover {
+  background: var(--pink-mid);
+}
+
+/* =========================================
+   7. Data Table
+========================================= */
+
+.table-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+/* HEADER */
+
+.students-table thead {
+  background: var(--light-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.students-table thead th {
+  text-align: left;
+  padding: 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.students-table thead th.text-right {
+  text-align: right;
+}
+
+/* BODY */
+
+.students-table tbody tr {
+  border-bottom: 1px solid var(--light-bg);
+}
+
+.students-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.students-table tbody td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+/* ROW */
+
+.student-row {
+  animation: rowIn 0.4s ease-out both;
+  transition: background 0.2s ease;
+}
+
+.student-row:hover {
+  background: var(--highlight-bg);
+}
+
+.student-row.deleting {
+  animation: rowOut 0.3s ease-out forwards;
+}
+
+/* CELLS */
+
+.student-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.student-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.student-id,
+.student-email,
+.student-contact {
+  font-size: 0.875rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.student-password {
+  font-family: monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+/* ACTIONS */
+
+.actions-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* EMPTY */
+
+.empty-state {
+  text-align: center;
+  color: var(--subtle);
+  font-size: 0.875rem;
+  padding: 40px !important;
+}
+
+/* =========================================
+   8. Avatars & Badges
+========================================= */
+
+/* AVATAR */
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--light-bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar span {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* BADGES */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* TYPES */
+
+.badge-shift {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+.badge-session {
+  background: var(--purple-light);
+  color: var(--purple);
+}
+
+.badge-class {
+  background: var(--sky-light);   /* replaced hardcoded color */
+  color: var(--sky);              /* replaced hardcoded color */
+}
+
+
+/* =========================================
+   9. Custom Delete Modal
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+  animation: fadeInOverlay 0.25s ease-out;
+}
+
+.modal-overlay.closing {
+  animation: fadeOutOverlay 0.25s ease-in forwards;
+}
+
+.modal-card {
+  padding: 32px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  animation: fadeInScale 0.25s ease-out;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+}
+
+.modal-card.closing {
+  animation: fadeOutScale 0.25s ease-in forwards;
+}
+
+.modal-icon-wrapper {
+  color: red;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-title {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.modal-desc {
+  margin: 0 0 24px 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.modal-btn-cancel, .modal-btn-delete {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+}
+
+.modal-btn-cancel {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.modal-btn-cancel:hover {
+  background: var(--light-bg);
+}
+
+.modal-btn-delete {
+  background: red;
+  color: var(--text-white);
+  border: none;
+}
+
+
+
+/* =========================================
+   10. Media Queries (Mobile Adjustments)
+   ========================================= */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 16px 16px 32px 16px;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+
+  .form-row-split {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary, .btn-secondary-outline {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   Large View Modal & Assignment History
+   ========================================= */
+.modal-card-large {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  text-align: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--surface);
+}
+
+.modal-header-custom {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--surface);
+}
+
+.modal-body-custom {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  background: var(--surface);
+}
+
+.modal-footer-custom {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  background: var(--light-bg);
+}
+
+/* Assignment Status Badges */
+.badge-pending   { background: var(--amber-light); color: var(--amber); }
+.badge-submitted { background: var(--blue-light);  color: var(--blue); }
+
+/* =========================================
+   File Download Button in Modal
+   ========================================= */
+.file-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  background: var(--blue-light);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.file-download-btn:hover {
+  background: var(--blue);
+  color: var(--text-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =========================================
+   Smooth Modal Open & Close Animations
+   ========================================= */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeOutOverlay {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes fadeOutScale {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.95); }
+}
+
+/* =========================================
+   Export Modal Styles
+   ========================================= */
+.export-section {
+  margin-bottom: 24px;
+}
+
+.export-section-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.export-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  background: var(--light-bg);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.export-format-group {
+  display: flex;
+  gap: 16px;
+  background: var(--light-bg);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.radio-input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Export Button */
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-export:hover {
+  background: var(--light-bg);
+  border-color: var(--muted);
+}
+
+/* =========================================
+   Download Button Progress & Spinner
+   ========================================= */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+.download-progress-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: width 0.2s ease-out;
+  z-index: 0;
+}
+
+.btn-content-relative {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

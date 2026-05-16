@@ -1,0 +1,82 @@
+.auth-navbar {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.auth-navbar-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Left group */
+.auth-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Back Button */
+.auth-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--light-bg);
+  padding: 8px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.auth-back-btn:hover {
+  background: var(--border);
+}
+
+.auth-back-btn:active {
+  transform: scale(0.95);
+}
+
+.auth-back-btn svg {
+  color: var(--text);
+}
+
+/* Brand */
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-brand img {
+  height: 30px;
+}
+
+.auth-brand span {
+  font-weight: 600; 
+  font-size: clamp(12px, 3.5vw, 15px);
+  color: var(--text);
+ 
+}
+
+
+@media (max-width: 330px) {
+  .auth-brand img {
+    height: 24px;
+  }
+
+  .auth-back-btn {
+
+  padding: 6px;
+
+}
+}

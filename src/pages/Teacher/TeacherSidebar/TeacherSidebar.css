@@ -1,0 +1,332 @@
+.teacher-sidebar {
+  width: 256px;
+  min-width: 60px;
+  transition: width 0.3s ease;
+
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
+.teacher-sidebar.collapsed {
+  width: 80px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.teacher-sidebar-header {
+  padding: 17px;
+  border-bottom: 1px solid var(--border);
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  user-select: none;
+  position: relative;
+}
+
+/* COLLAPSE BUTTON */
+.teacher-collapse-btn {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.3s ease;
+
+  flex-shrink: 0;
+
+  color: var(--text);
+}
+
+.teacher-collapse-btn:hover {
+  background: var(--light-bg);
+}
+
+.teacher-collapse-btn img {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.teacher-sidebar.collapsed .teacher-collapse-btn img {
+  transform: rotate(180deg);
+}
+
+/* positioning */
+.teacher-sidebar:not(.collapsed) .teacher-collapse-btn {
+  position: absolute;
+  top: 20px;
+  right: 8px;
+}
+
+.teacher-sidebar.collapsed .teacher-collapse-btn {
+  position: static;
+  margin: 0 auto;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.teacher-sidebar-logo {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* .teacher-sidebar.collapsed .teacher-sidebar-logo {
+  opacity: 0;
+  transform: scale(0.8);
+  width: 0;
+  overflow: hidden;
+} */
+
+/* (fixed duplicate bug removed) */
+
+/* =========================
+   TITLE
+========================= */
+
+.teacher-sidebar-title-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  max-width: 160px;
+
+  opacity: 1;
+  transition: opacity 0.25s ease, max-width 0.3s ease, transform 0.25s ease;
+}
+
+.teacher-sidebar.collapsed .teacher-sidebar-title-container {
+  opacity: 0;
+  max-width: 0;
+  transform: translateX(-12px);
+}
+
+.teacher-sidebar-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.teacher-sidebar-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.teacher-sidebar-nav {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teacher-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--muted);
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+
+  border-left: 3px solid transparent;
+  min-height: 46px;
+}
+
+.teacher-nav-item span {
+  white-space: nowrap;
+  overflow: hidden;
+
+  transition: opacity 0.25s ease, max-width 0.25s ease, transform 0.25s ease;
+  max-width: 120px;
+  opacity: 1;
+}
+
+/* collapsed state */
+.teacher-sidebar.collapsed .teacher-nav-item {
+  justify-content: center;
+  padding: 12px;
+}
+
+.teacher-sidebar.collapsed .teacher-nav-item span {
+  opacity: 0;
+  max-width: 0;
+  transform: translateX(-10px);
+}
+
+/* hover */
+.teacher-nav-item:hover {
+  background: var(--light-bg);
+  color: var(--text);
+}
+
+/* active */
+.teacher-nav-item.active {
+  background: var(--highlight-bg);
+  border-left-color: var(--blue);
+  color: var(--blue);
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+.teacher-nav-item.logout {
+  color: #ef4444;
+}
+
+.teacher-nav-item.logout:hover {
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.teacher-sidebar-footer {
+  margin-top: auto;
+  padding: 16px;
+}
+
+/* =========================
+   COLLAPSED LOGO AREA
+========================= */
+
+.teacher-collapsed-logo-wrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.teacher-collapsed-logo-wrapper .teacher-sidebar-logo {
+  width: 40px;
+  height: 40px;
+}
+
+/* expand button */
+.teacher-expand-btn {
+  width: 40px;
+  height: 40px;
+
+  opacity: 0;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+
+  transition: opacity 0.25s ease, transform 0.25s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute !important;
+  inset: 0;
+  margin: 0 !important;
+  color: var(--text);
+}
+
+.teacher-expand-btn img {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.teacher-collapsed-logo-wrapper:hover .teacher-sidebar-logo {
+  opacity: 0;
+}
+
+.teacher-collapsed-logo-wrapper:hover .teacher-expand-btn {
+  opacity: 1;
+}
+
+.teacher-expand-btn:hover {
+  transform: scale(1.08);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .teacher-sidebar-header {
+    padding: 13px 16px;
+    gap: 12px;
+  }
+
+  .teacher-collapse-btn img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .teacher-sidebar-title {
+    font-size: 12px;
+  }
+
+  .teacher-sidebar-subtitle {
+    font-size: 10px;
+  }
+
+  .teacher-nav-item {
+    font-size: 13px;
+  }
+
+  .teacher-sidebar.collapsed .teacher-nav-item {
+    padding: 9px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .teacher-sidebar {
+    width: 100%;
+  }
+
+  .teacher-sidebar.collapsed {
+    width: 75px;
+  }
+}

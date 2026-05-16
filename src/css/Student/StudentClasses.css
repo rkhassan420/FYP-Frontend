@@ -1,0 +1,280 @@
+/* ==============================================
+   Student Classes Page (Theme Unified)
+============================================== */
+
+/* Layout */
+.page-wrapper {
+  min-height: 100%;
+  background: var(--teacher-portal-bg);
+  padding: 32px 24px;
+  font-family: var(--font-sans);
+}
+
+/* Header */
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 6px 0;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: var(--surface);
+  color: var(--blue);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--light-bg);
+  border-color: var(--muted);
+}
+
+/* Grid */
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.class-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s ease;
+  opacity: 0;
+  animation: slideUpFade 0.5s ease-out forwards;
+}
+
+.class-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Theme Variants */
+.theme-blue .class-icon-wrapper {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+.theme-blue .progress-fill {
+  background: var(--blue);
+}
+
+.theme-purple .class-icon-wrapper {
+  background: var(--purple-light);
+  color: var(--purple);
+}
+.theme-purple .progress-fill {
+  background: var(--purple);
+}
+
+.theme-amber .class-icon-wrapper {
+  background: var(--amber-light);
+  color: var(--amber);
+}
+.theme-amber .progress-fill {
+  background: var(--amber);
+}
+
+/* Header */
+.class-card-header {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.class-icon-wrapper {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.class-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.class-code {
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: var(--light-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Teacher */
+.teacher-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+/* Progress */
+.progress-section {
+  background: var(--light-bg);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.progress-percentage {
+  font-weight: 600;
+}
+
+.progress-track {
+  height: 6px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Footer */
+.class-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Badges */
+.pending-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--amber-light);
+  color: var(--amber);
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.all-caught-up-badge {
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Open Button */
+.open-class-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--blue);
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: 0.2s ease;
+}
+
+.open-class-btn:hover {
+  background: var(--blue-light);
+}
+
+/* Empty State */
+.empty-state-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--border);
+  padding: 50px 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-icon {
+  color: var(--subtle);
+  margin-bottom: 12px;
+}
+
+.empty-state-card h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.empty-state-card p {
+  font-size: 0.85rem;
+}
+
+/* Animation */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}

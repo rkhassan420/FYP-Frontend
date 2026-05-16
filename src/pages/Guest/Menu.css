@@ -1,0 +1,78 @@
+/* overlay */
+.guest-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 999;
+}
+
+/* popup */
+.guest-profile-popup {
+  position: absolute;
+  bottom: 80px;
+  left: 16px;
+
+  width: 240px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+  padding: 10px;
+  z-index: 1000;
+}
+
+/* header */
+.guest-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  font-weight: 600;
+  margin-bottom: 10px0;
+}
+
+.guest-popup-close{
+
+  color: red;
+  width: 20px;
+  height: 20px;  
+}
+
+/* user */
+.guest-popup-user {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.guest-popup-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* items */
+.guest-popup-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 8px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.guest-popup-item:hover {
+  background: rgba(59,130,246,0.08);
+}
+
+.guest-popup-item.logout {
+  color: #dc2626;
+}

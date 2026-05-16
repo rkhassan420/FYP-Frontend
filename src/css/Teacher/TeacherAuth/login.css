@@ -1,0 +1,248 @@
+/* =========================
+   LOGIN WRAPPER
+========================= */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  background: var(--gradient-primary);
+  font-family: var(--font-sans);
+  padding: clamp(0.5rem, 3vw, 2rem);
+}
+
+/* =========================
+   LOGIN CARD
+========================= */
+.login-card {
+  background: var(--surface);
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.login-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.login-card h2 {
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.login-card p {
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* =========================
+   FORM
+========================= */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: 0.2s ease;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-mid);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn-primary-auth {
+  padding: 0.9rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-primary-auth:hover {
+  background: var(--blue-dark);
+}
+
+/* =========================
+   LINKS
+========================= */
+.forgot {
+  text-align: right;
+  color: var(--blue);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.signup-link {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.signup-link span {
+  color: var(--blue);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.signup-link span:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   PASSWORD FIELD
+========================= */
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+/* =========================
+   OTP INPUT
+========================= */
+.otp-input-container {
+  display: flex;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.otp-field {
+  width: clamp(2.5rem, 13vw, 2.8rem);
+  height: clamp(3rem, 14vw, 3.2rem);
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: 0.2s ease;
+}
+
+.otp-field:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-mid);
+}
+
+/* =========================
+   ERROR
+========================= */
+.error-text {
+  color: #ef4444;
+  font-size: 0.85rem;
+  text-align: left;
+  margin: -0.25rem 0 0;
+}
+
+.success-text {
+  color: #16a34a;
+  font-size: 0.85rem;
+  text-align: left;
+  margin: -0.25rem 0 0;
+}
+
+/* =========================
+   OTP FOOTER
+========================= */
+.otp-footer {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.resend-btn {
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.resend-btn:hover {
+  color: var(--blue-dark);
+  text-decoration: underline;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (min-width: 768px) {
+  .login-card {
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-card {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-wrapper {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 100%;
+    min-height: calc(100vh - 70px);
+    border-radius: 0;
+    box-shadow: none;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+}

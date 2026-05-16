@@ -1,0 +1,34 @@
+/* ── Advantages ───────────────────────────────────────────── */
+.advantages-grid { gap: 2.5rem;}
+
+.adv-item {
+  display: flex;  
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.8rem;
+  border-radius: var(--radius-lg);
+  background: var(--highlight-bg);
+}
+.adv-item h4 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+.adv-item p  { font-size: 0.875rem; color: var(--muted); }
+
+.adv-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.adv-blue   { background: var(--blue-mid);   }
+.adv-green  { background: var(--green-mid);  }
+.adv-purple { background: var(--purple-mid); }
+.adv-amber  { background: var(--amber-light);}
+.adv-pink   { background: var(--pink-light); }
+
+.text-blue   { color: var(--blue);   }
+.text-green  { color: var(--green);  }
+.text-purple { color: var(--purple); }
+.text-amber  { color: var(--amber);  }
+.text-pink   { color: var(--pink);   }
