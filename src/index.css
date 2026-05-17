@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
-
 .light-theme {
   /* =========================
      BASE COLORS
@@ -43,9 +42,8 @@
   /* =========================
      TYPOGRAPHY
   ========================= */
-  /* --font-sans: 'DM Sans', sans-serif; */
+
   --font-sans: 'Outfit', sans-serif;
-  /* --font-serif: system-ui, -apple-system, sans-serif; */
 
 
   /* =========================
@@ -191,7 +189,6 @@
   ========================= */
   --gradient-primary: linear-gradient(135deg, var(--blue-mid), var(--bg));
 }
-
 
 
 

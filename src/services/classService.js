@@ -2,6 +2,7 @@ import apiClient from "./apiClient";
 import { ENDPOINTS } from "./endpoints";
 
 export const classService = {
+
   createClass: (payload) => apiClient.post(ENDPOINTS.classes.root, payload),
   getClasses: (params) => apiClient.get(ENDPOINTS.classes.root, { params }),
   getClassByCode: (code) => apiClient.get(ENDPOINTS.classes.byCode(code)),
@@ -17,53 +18,31 @@ export const classService = {
   getEnrolledClasses: () =>  apiClient.get(ENDPOINTS.classes.enrolledClasses),
   leaveClass: (code) => apiClient.post(ENDPOINTS.classes.leaveClass(code)),
 
-  // POST /api/submissions/ — multipart/form-data
-  // Fields: file, assignment (id), assignment_name (title)
- submitAssignment: (assignmentId, assignmentName, file) => {
-  const formData = new FormData();
-  formData.append("assignment", assignmentId);
-  formData.append("assignment_name", assignmentName);
-  formData.append("file", file);
 
-  return apiClient.post(ENDPOINTS.submissions.root, formData);
-  // ✅ No headers — axios detects FormData and sets Content-Type + boundary automatically
-},
+  submitAssignment: (assignmentId, assignmentName, file) => {
+    const formData = new FormData();
+    formData.append("assignment", assignmentId);
+    formData.append("assignment_name", assignmentName);
+    formData.append("file", file);
 
+    return apiClient.post(ENDPOINTS.submissions.root, formData);
+  
+  },
 
- guestSubmitAssignment: (assignmentId, assignmentName, file) => {
-  const formData = new FormData();
- 
-  formData.append("assignment_name", assignmentName);
-  formData.append("file", file);
+  guestSubmitAssignment: (assignmentId, assignmentName, file) => {
+    const formData = new FormData(); 
+    formData.append("assignment_name", assignmentName);
+    formData.append("file", file);
 
-  return apiClient.post(ENDPOINTS.submissions.root, formData);
-  // ✅ No headers — axios detects FormData and sets Content-Type + boundary automatically
-},
+    return apiClient.post(ENDPOINTS.submissions.root, formData);
+    
+  },
 
-
-
-
- // GET /api/submissions/:id/status/
-getSubmissionStatus: (id) => apiClient.get(ENDPOINTS.submissions.status(id)),
-
-
-    // GET /api/submissions/assignment/?assignment=<id>  (teacher only)
-getAssignmentSubmissions: (assignmentId) =>
-    apiClient.get(ENDPOINTS.submissions.byAssignment(assignmentId)),
-
-  // services/classService.js  (or wherever your service lives)
-getResults: (params = {}) => {
-  const query = new URLSearchParams(params).toString();
+getSubmissionStatus: (id) => apiClient.get(ENDPOINTS.submissions.status(id)),  
+getAssignmentSubmissions: (assignmentId) => apiClient.get(ENDPOINTS.submissions.byAssignment(assignmentId)),
+getResults: (params = {}) => { const query = new URLSearchParams(params).toString();
   return apiClient.get(`results/${query ? "?" + query : ""}`);
 },
-
-
-
-
 terminateSubmission: (id) => apiClient.post(`/submissions/${id}/terminate/`),
-
-
-
-
 
 };

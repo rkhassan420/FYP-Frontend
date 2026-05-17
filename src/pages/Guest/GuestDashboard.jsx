@@ -1,36 +1,3 @@
-// import React from "react";
-// import "./guest.css";
-// import GuestSidebar from './GuestSidebar';
-// import Evaluator from "../../components/Evaluator/Evaluator";
-// import { useState } from "react";
-
-// export default function Dashboard() {
-
-//   const [activeSessionId, setActiveSessionId] = useState(null);
-
-
-
-//   return (
-//     <div className="app-shell">
-
-//       <GuestSidebar
-//   activeSessionId={activeSessionId}
-//   onSessionSelect={setActiveSessionId}
-// />
-
-//       <main className="main-content">
-//         <Evaluator
-  
-//   activeSessionId={activeSessionId}
-//   onSessionChange={setActiveSessionId}
-// />
-//       </main>
-
-//     </div>
-//   );
-// }
-
-
 import React, { useState } from "react";
 import "./guest.css";
 import GuestSidebar from './GuestSidebar';

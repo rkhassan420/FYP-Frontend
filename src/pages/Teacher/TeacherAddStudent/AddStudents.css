@@ -21,9 +21,6 @@
   animation: fadeInUp 0.5s ease-out both;
 }
 
-/* =========================================
-   3. Page Layout & Typography
-   ========================================= */
 * {
   box-sizing: border-box;
 }
@@ -42,7 +39,7 @@
   margin: 0 auto;
 }
 
-/* ================= HEADER ================= */
+
 
 .page-header {
   margin-bottom: 32px;
@@ -52,18 +49,16 @@
   margin: 0;
   font-weight: 700;
   color: var(--text);
-  font-size: 1.25rem; /* FIXED (was 0.5rem ❌) */
+  font-size: 1.25rem; 
 }
 
 .page-subtitle {
   margin-top: 4px;
-  font-size: 0.875rem; /* FIXED (was 0.2rem ❌) */
+  font-size: 0.875rem; 
   color: var(--muted);
 }
 
-/* =========================================
-   CARDS & CONTAINERS
-========================================= */
+
 
 .card {
   background: var(--surface);
@@ -82,9 +77,7 @@
   margin: 0 0 24px 0;
 }
 
-/* =========================================
-   GRIDS & FORMS
-========================================= */
+
 
 .top-row,
 .form-grid {
@@ -155,7 +148,7 @@
   cursor: not-allowed;
 }
 
-/* SELECT */
+
 
 select.input-field {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
@@ -164,8 +157,6 @@ select.input-field {
   padding-right: 38px;
   cursor: pointer;
 }
-
-/* SEARCH */
 
 .search-wrapper {
   position: relative;
@@ -186,7 +177,7 @@ select.input-field {
   padding-left: 42px;
 }
 
-/* ERROR */
+
 
 .form-error-message {
   color: var(--pink);
@@ -195,9 +186,7 @@ select.input-field {
   grid-column: 1 / -1;
 }
 
-/* =========================================
-   BUTTONS
-========================================= */
+
 
 .form-actions {
   display: flex;
@@ -206,7 +195,6 @@ select.input-field {
   flex-wrap: wrap;
 }
 
-/* PRIMARY */
 
 .btn-primary {
   display: inline-flex;
@@ -240,7 +228,7 @@ select.input-field {
   cursor: not-allowed;
 }
 
-/* SECONDARY */
+
 
 .btn-secondary-outline {
   display: inline-flex;
@@ -263,7 +251,7 @@ select.input-field {
   border-color: var(--muted);
 }
 
-/* ICON BUTTONS */
+
 
 .icon-btn {
   width: 36px;
@@ -284,7 +272,7 @@ select.input-field {
   color: white;
 }
 
-/* VARIANTS */
+
 
 .icon-btn-view {
   background: var(--green-light);
@@ -310,9 +298,7 @@ select.input-field {
   background: var(--pink-mid);
 }
 
-/* =========================================
-   7. Data Table
-========================================= */
+
 
 .table-section {
   display: flex;
@@ -340,7 +326,7 @@ select.input-field {
   min-width: 800px;
 }
 
-/* HEADER */
+
 
 .students-table thead {
   background: var(--light-bg);
@@ -362,7 +348,6 @@ select.input-field {
   text-align: right;
 }
 
-/* BODY */
 
 .students-table tbody tr {
   border-bottom: 1px solid var(--light-bg);
@@ -377,7 +362,7 @@ select.input-field {
   vertical-align: middle;
 }
 
-/* ROW */
+
 
 .student-row {
   animation: rowIn 0.4s ease-out both;
@@ -392,7 +377,7 @@ select.input-field {
   animation: rowOut 0.3s ease-out forwards;
 }
 
-/* CELLS */
+
 
 .student-name-cell {
   display: flex;
@@ -422,7 +407,7 @@ select.input-field {
   color: var(--text);
 }
 
-/* ACTIONS */
+
 
 .actions-cell {
   display: flex;
@@ -431,7 +416,7 @@ select.input-field {
   gap: 8px;
 }
 
-/* EMPTY */
+
 
 .empty-state {
   text-align: center;
@@ -440,11 +425,7 @@ select.input-field {
   padding: 40px !important;
 }
 
-/* =========================================
-   8. Avatars & Badges
-========================================= */
 
-/* AVATAR */
 
 .avatar {
   width: 36px;
@@ -463,7 +444,7 @@ select.input-field {
   font-weight: 700;
 }
 
-/* BADGES */
+
 
 .badge {
   display: inline-flex;
@@ -476,7 +457,7 @@ select.input-field {
   white-space: nowrap;
 }
 
-/* TYPES */
+
 
 .badge-shift {
   background: var(--blue-light);
@@ -489,14 +470,12 @@ select.input-field {
 }
 
 .badge-class {
-  background: var(--sky-light);   /* replaced hardcoded color */
-  color: var(--sky);              /* replaced hardcoded color */
+  background: var(--sky-light); 
+  color: var(--sky);              
 }
 
 
-/* =========================================
-   9. Custom Delete Modal
-   ========================================= */
+
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -586,9 +565,6 @@ select.input-field {
 
 
 
-/* =========================================
-   10. Media Queries (Mobile Adjustments)
-   ========================================= */
 @media (max-width: 768px) {
   .page-wrapper {
     padding: 16px 16px 32px 16px;
@@ -607,14 +583,12 @@ select.input-field {
     flex-direction: column;
   }
 
-  .btn-primary, .btn-secondary-outline {
+  /* .btn-primary, .btn-secondary-outline {
     width: 100%;
-  }
+  } */
 }
 
-/* =========================================
-   Large View Modal & Assignment History
-   ========================================= */
+
 .modal-card-large {
   width: 100vw !important;
   height: 100vh !important;
@@ -657,13 +631,11 @@ select.input-field {
   background: var(--light-bg);
 }
 
-/* Assignment Status Badges */
+
 .badge-pending   { background: var(--amber-light); color: var(--amber); }
 .badge-submitted { background: var(--blue-light);  color: var(--blue); }
 
-/* =========================================
-   File Download Button in Modal
-   ========================================= */
+
 .file-download-btn {
   display: inline-flex;
   align-items: center;
@@ -683,9 +655,7 @@ select.input-field {
   box-shadow: var(--shadow-md);
 }
 
-/* =========================================
-   Smooth Modal Open & Close Animations
-   ========================================= */
+
 @keyframes fadeInOverlay {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -701,9 +671,7 @@ select.input-field {
   to   { opacity: 0; transform: scale(0.95); }
 }
 
-/* =========================================
-   Export Modal Styles
-   ========================================= */
+
 .export-section {
   margin-bottom: 24px;
 }
@@ -776,7 +744,7 @@ select.input-field {
   margin-bottom: 16px;
 }
 
-/* Export Button */
+
 .btn-export {
   display: inline-flex;
   align-items: center;
@@ -798,9 +766,7 @@ select.input-field {
   border-color: var(--muted);
 }
 
-/* =========================================
-   Download Button Progress & Spinner
-   ========================================= */
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }

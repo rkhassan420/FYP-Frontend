@@ -1,19 +1,21 @@
 /* ===============================
-   Settings Page (Clean Version)
+   Settings Page (Responsive Pro)
 ================================ */
 
 /* Layout */
 .settings-page-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   background: var(--teacher-portal-bg);
+  overflow-x: hidden;
   overflow-y: auto;
   font-family: var(--font-sans);
 }
 
 .settings-container {
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 32px 24px 48px;
 }
 
 /* Header */
@@ -22,16 +24,18 @@
 }
 
 .page-title {
-  font-size: 1.5rem;
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
   color: var(--text);
-  margin: 0;
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 .page-subtitle {
-  margin-top: 6px;
-  font-size: 0.875rem;
+  margin-top: 8px;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
   color: var(--muted);
+  line-height: 1.6;
 }
 
 /* Card */
@@ -42,6 +46,7 @@
   padding: 24px;
   margin-bottom: 24px;
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 /* Section Header */
@@ -56,12 +61,14 @@
 
 .section-icon {
   color: var(--blue);
+  flex-shrink: 0;
 }
 
 .setting-section-title {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
   font-weight: 600;
   color: var(--text);
+  word-break: break-word;
 }
 
 /* Inputs */
@@ -80,6 +87,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .input-label {
@@ -88,17 +96,24 @@
   color: var(--text);
 }
 
-.input-field input {
+.input-field input,
+.input-field textarea,
+.input-field select {
+  width: 100%;
+  min-width: 0;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 10px 12px;
-  font-size: 0.85rem;
+  padding: 12px 14px;
+  font-size: 0.9rem;
   background: var(--surface);
   color: var(--text);
   transition: 0.2s ease;
+  font-family: inherit;
 }
 
-.input-field input:focus {
+.input-field input:focus,
+.input-field textarea:focus,
+.input-field select:focus {
   outline: none;
   border-color: var(--blue);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
@@ -109,19 +124,23 @@
   background: var(--blue-light);
   border: 1px solid var(--blue);
   border-radius: var(--radius-md);
-  padding: 12px;
+  padding: 14px;
   display: flex;
+  align-items: flex-start;
   gap: 10px;
   margin-bottom: 16px;
 }
 
 .info-icon {
   color: var(--blue-dark);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .info-text {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--blue-dark);
+  line-height: 1.6;
 }
 
 /* Rows */
@@ -129,18 +148,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  gap: 16px;
+  padding: 14px 0;
 }
 
 .setting-label {
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--text);
+  line-height: 1.4;
 }
 
 .setting-description {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
 }
 
 /* Divider */
@@ -153,18 +176,25 @@
 /* Buttons */
 .button-group {
   display: flex;
-  gap: 10px;
-  margin-top: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .button {
-  padding: 10px 18px;
+  min-height: 44px;
+  padding: 12px 20px;
   border-radius: var(--radius-md);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
   border: none;
   transition: 0.2s ease;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 /* Primary */
@@ -191,23 +221,151 @@
 
 /* Danger */
 .button.danger {
-  background: red;
+  background: #dc2626;
   color: white;
+}
+
+.button.danger:hover {
+  background: #b91c1c;
 }
 
 /* Danger Zone */
 .danger-zone {
-  border: 1px solid red;
+  border: 1px solid rgba(220, 38, 38, 0.35);
 }
 
 .danger-title {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: red;
+  color: #dc2626;
+  margin-bottom: 6px;
 }
 
 .danger-description {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--muted);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+========================================= */
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .settings-container {
+    max-width: 1000px;
+  }
+
+  .settings-card {
+    padding: 32px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .settings-container {
+    padding: 28px 20px 40px;
+  }
+
+  .settings-card {
+    padding: 22px;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 20px 16px 32px;
+  }
+
+  .settings-card {
+    padding: 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .form-group {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .setting-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .settings-container {
+    padding: 16px 12px 28px;
+  }
+
+  .page-header {
+    margin-bottom: 24px;
+  }
+
+  .settings-card {
+    padding: 16px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+  }
+
+  .input-field input,
+  .input-field textarea,
+  .input-field select {
+    padding: 11px 12px;
+    font-size: 0.85rem;
+  }
+
+  .button {
+    font-size: 0.82rem;
+    padding: 11px 16px;
+  }
+
+  .info-box {
+    padding: 12px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .settings-container {
+    padding: 14px 10px 24px;
+  }
+
+  .settings-card {
+    padding: 14px;
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+  }
+
+  .setting-label {
+    font-size: 0.82rem;
+  }
+
+  .setting-description,
+  .danger-description,
+  .info-text {
+    font-size: 0.74rem;
+  }
+
+  .button {
+    min-height: 42px;
+    font-size: 0.78rem;
+  }
 }
