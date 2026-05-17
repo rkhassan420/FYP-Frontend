@@ -58,8 +58,7 @@ export default function TeacherAssignmentTable({
               <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Deadline</th>
-                <th>Max Score</th>
+                <th>Deadline</th>                
                 <th>Submissions</th>
                 <th>Status</th>
                 <th className="assign-text-right">Actions</th>
@@ -114,10 +113,7 @@ export default function TeacherAssignmentTable({
                       <p className="assign-text-strong">{formatDeadline(assignment.deadline)}</p>
                     </td>
 
-                    {/* Max Score */}
-                    <td>
-                      <p className="assign-text-normal">{assignment.max_score ?? "—"}</p>
-                    </td>
+                   
 
                     {/* Submissions */}
                     <td>

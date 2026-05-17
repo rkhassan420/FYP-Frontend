@@ -29,10 +29,18 @@ function aiBadgeStyle(pct) {
     : { background: "#dcfce7", color: "#16a34a" };
 }
 
+// function removeFromLocalHistory(id) {
+//   try {
+//     const history = JSON.parse(localStorage.getItem("ev_history")) || [];
+//     localStorage.setItem("ev_history", JSON.stringify(history.filter((h) => h.id !== id)));
+//     window.dispatchEvent(new CustomEvent("ev_history_updated"));
+//   } catch {}
+// }
+
 function removeFromLocalHistory(id) {
   try {
-    const history = JSON.parse(localStorage.getItem("ev_history")) || [];
-    localStorage.setItem("ev_history", JSON.stringify(history.filter((h) => h.id !== id)));
+    const history = JSON.parse(localStorage.getItem("guest_ev_history")) || [];  // 👈 fix key
+    localStorage.setItem("guest_ev_history", JSON.stringify(history.filter((h) => h.id !== id)));  // 👈 fix key
     window.dispatchEvent(new CustomEvent("ev_history_updated"));
   } catch {}
 }
@@ -285,7 +293,7 @@ export default function GuestSidebar({ activeSessionId, onSessionSelect }) {
     authService.getProfile().then(setUser).catch(() => {});
   }, []);
 
-  const refreshHistory = useCallback(() => setHistory(loadHistory()), []);
+  const refreshHistory = useCallback(() => setHistory(loadHistory("guest")), []);
 
   useEffect(() => {
     refreshHistory();
@@ -326,56 +334,93 @@ export default function GuestSidebar({ activeSessionId, onSessionSelect }) {
   const handleLogout = async () => {
     const refresh = getRefreshToken();
     if (refresh) { try { await authService.logout({ refresh }); } catch {} }
-    clearHistory();
+    clearHistory("guest");
     localStorage.removeItem(ACTIVE_SESSION_KEY);
     clearAuthSession();
     navigate("/guest/login", { replace: true });
   };
 
   // ── Delete a history entry (local + Django) ───────────────────────────────
+  // const handleDelete = async (entry) => {
+  //   // 1. Remove from local history immediately
+  //   removeFromLocalHistory(entry.id);
+
+  //   // 2. If this was the active session, reset evaluator
+  //   if (activeSessionId === entry.id) {
+  //     onSessionSelect && onSessionSelect(null);
+  //   }
+
+  //   // 3. Call Django API to delete the submission
+  //   try {
+  //     await classService.deleteSubmission(entry.id);
+  //   } catch (err) {
+  //     console.warn("Could not delete submission on server:", err);
+  //     // Already removed locally — silently continue
+  //   }
+  // };
+
   const handleDelete = async (entry) => {
-    // 1. Remove from local history immediately
-    removeFromLocalHistory(entry.id);
 
-    // 2. If this was the active session, reset evaluator
-    if (activeSessionId === entry.id) {
-      onSessionSelect && onSessionSelect(null);
-    }
+    
+  // 1. Remove from local history
+  console.log("buton working but not deleting ")
+  removeFromLocalHistory(entry.id);
 
-    // 3. Call Django API to delete the submission
-    try {
-      await classService.deleteSubmission(entry.id);
-    } catch (err) {
-      console.warn("Could not delete submission on server:", err);
-      // Already removed locally — silently continue
-    }
-  };
+  // 2. If this was the active session, reset evaluator
+  if (activeSessionId === entry.id) {
+    onSessionSelect && onSessionSelect(null);
+  }
+};
 
   // ── Cancel a processing entry (stop polling + Django cancel + remove) ─────
+  // const handleCancel = async (entry) => {
+  //   // 1. Remove locally
+  //   removeFromLocalHistory(entry.id);
+  //   localStorage.removeItem("ev_pending");
+
+  //   // 2. Reset evaluator if this was active
+  //   if (activeSessionId === entry.id) {
+  //     onSessionSelect && onSessionSelect(null);
+  //   }
+
+  //   // 3. Tell Evaluator component to stop polling for this job
+  //   window.dispatchEvent(new CustomEvent("ev_cancel_submission", { detail: { id: entry.id } }));
+
+  //   // 4. Tell Django to cancel / delete
+  //   try {
+  //     if (classService.cancelSubmission) {
+  //       await classService.cancelSubmission(entry.id);
+  //     } else {
+  //       await classService.deleteSubmission(entry.id);
+  //     }
+  //   } catch (err) {
+  //     console.warn("Could not cancel submission on server:", err);
+  //   }
+  // };
+
   const handleCancel = async (entry) => {
-    // 1. Remove locally
-    removeFromLocalHistory(entry.id);
-    localStorage.removeItem("ev_pending");
+  // 1. Remove locally
+  removeFromLocalHistory(entry.id);
+  localStorage.removeItem("ev_pending");
 
-    // 2. Reset evaluator if this was active
-    if (activeSessionId === entry.id) {
-      onSessionSelect && onSessionSelect(null);
-    }
+  // 2. Reset evaluator if this was active
+  if (activeSessionId === entry.id) {
+    onSessionSelect && onSessionSelect(null);
+  }
 
-    // 3. Tell Evaluator component to stop polling for this job
-    window.dispatchEvent(new CustomEvent("ev_cancel_submission", { detail: { id: entry.id } }));
+  // 3. Tell Evaluator to stop polling
+  window.dispatchEvent(new CustomEvent("ev_cancel_submission", { detail: { id: entry.id } }));
 
-    // 4. Tell Django to cancel / delete
-    try {
-      if (classService.cancelSubmission) {
-        await classService.cancelSubmission(entry.id);
-      } else {
-        await classService.deleteSubmission(entry.id);
-      }
-    } catch (err) {
-      console.warn("Could not cancel submission on server:", err);
-    }
-  };
+  // 4. Terminate on Django (reset for re-evaluation)
+  try {
+    await classService.terminateSubmission(entry.id);  // 👈 terminate instead of delete
+  } catch (err) {
+    console.warn("Could not terminate submission on server:", err);
+  }
+};
+
+
+
 
   // ── Group history ─────────────────────────────────────────────────────────
   const grouped = (() => {

@@ -205,7 +205,7 @@ export default function ViewAssignmentsModal({
         deadlineTime: assignment.deadline
           ? assignment.deadline.split("T")[1]?.slice(0, 5) || "23:59"
           : "23:59",
-        maxScore: assignment.max_score || "",
+        
       },
     },
   });
@@ -425,8 +425,7 @@ export default function ViewAssignmentsModal({
                         <th>#</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Deadline</th>
-                        <th>Score</th>
+                        <th>Deadline</th>                        
                         <th>Status</th>
                         <th>Actions</th>
                       </tr>
@@ -437,8 +436,7 @@ export default function ViewAssignmentsModal({
                           <td className="sam-td-num">{index + 1}</td>
                           <td><div className="sam-assignment-title">{a.title}</div></td>
                           <td><div className="sam-assignment-desc">{a.description || "—"}</div></td>
-                          <td className="sam-td-muted">{formatDeadline(a.deadline)}</td>
-                          <td className="sam-td-muted">{a.max_score ?? "—"}</td>
+                          <td className="sam-td-muted">{formatDeadline(a.deadline)}</td>                          
                           <td>
                             {a.is_past_deadline ? (
                               <span className="sam-badge sam-badge-expired">Expired</span>

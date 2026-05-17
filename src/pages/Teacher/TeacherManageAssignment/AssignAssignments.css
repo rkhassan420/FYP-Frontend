@@ -52,6 +52,14 @@
   z-index: 10; 
 }
 
+.assign-grid-fr {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  position: relative;
+  z-index: 10; 
+}
+
 .assign-grid-third {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

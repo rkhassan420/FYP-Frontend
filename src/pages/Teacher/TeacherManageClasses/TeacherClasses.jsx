@@ -67,6 +67,7 @@ export default function TeacherClasses({ onCreateAssignment, onEditAssignment })
     try {
       const response = await classService.getClasses();
       const results = Array.isArray(response) ? response : response.results || [];
+      console.log("API results:", results);
       setClasses(results.map(normalizeClass));
       setLoadState("success");
     } catch (err) {

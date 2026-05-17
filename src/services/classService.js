@@ -58,4 +58,12 @@ getResults: (params = {}) => {
 },
 
 
+
+
+terminateSubmission: (id) => apiClient.post(`/submissions/${id}/terminate/`),
+
+
+
+
+
 };

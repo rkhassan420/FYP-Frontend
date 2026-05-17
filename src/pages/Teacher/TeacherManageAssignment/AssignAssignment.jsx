@@ -123,8 +123,7 @@ export default function AssignAssignments({ preSelectedClass }) {
       title:        "",
       description:  "",
       deadline:     "",
-      deadlineTime: "23:59",
-      maxScore:     "",
+      deadlineTime: "23:59",      
     };
   });
 
@@ -249,7 +248,7 @@ useEffect(() => {
       description:  "",
       deadline:     "",
       deadlineTime: "23:59",
-      maxScore:     "",
+      
     };
     setForm(freshForm);
     setFormError("");
@@ -264,8 +263,7 @@ useEffect(() => {
     if (!form.classCode) return setFormError("Please select a class to assign this to.");
     if (!form.title.trim()) return setFormError("Please enter an assignment title.");
     if (!form.deadline) return setFormError("Please select a deadline date.");
-    if (!form.maxScore || isNaN(Number(form.maxScore)) || Number(form.maxScore) <= 0)
-      return setFormError("Please enter a valid max score.");
+    
 
     setFormError("");
     setIsAssigning(true);
@@ -275,7 +273,7 @@ useEffect(() => {
       title:       form.title.trim(),
       description: form.description.trim(),
       deadline,
-      max_score:   Number(form.maxScore),
+      
     };
 
     try {
@@ -344,7 +342,7 @@ useEffect(() => {
       deadlineTime: assignment.deadline
         ? assignment.deadline.split("T")[1]?.slice(0, 5) || "23:59"
         : "23:59",
-      maxScore: assignment.max_score || "",
+      
     };
     setEditMode(true);
     setEditingId(assignment.id);
@@ -462,7 +460,7 @@ useEffect(() => {
             </div>
           </div>
 
-          <div className="assign-grid-half assign-section-margin">
+          <div className="assign-grid-half assign-grid-fr assign-section-margin">
             <div className="assign-field-group">
               <label className="assign-field-label">Assignment Title</label>
               <input
@@ -471,27 +469,7 @@ useEffect(() => {
                 placeholder="e.g., Chapter 5 Quiz"
               />
             </div>
-            <div className="assign-field-group">
-              <label className="assign-field-label">Max Score</label>
-              <input
-                type="number" name="maxScore" value={form.maxScore}
-                onChange={handleInputChange} className="assign-input-field"
-                placeholder="e.g., 100" min="1"
-              />
-            </div>
-          </div>
-
-          <div className="assign-field-group assign-section-margin">
-            <label className="assign-field-label">Description / Instructions</label>
-            <textarea
-              name="description" value={form.description}
-              onChange={handleInputChange} className="assign-textarea-field"
-              placeholder="Enter assignment instructions, guidelines, and any additional notes..."
-            />
-          </div>
-
-          <div className="assign-grid-half assign-section-margin">
-            <div className="assign-field-group">
+             <div className="assign-field-group">
               <label className="assign-field-label">Deadline Date</label>
               <input
                 type="date" name="deadline" value={form.deadline}
@@ -505,6 +483,33 @@ useEffect(() => {
                 onChange={handleInputChange} className="assign-input-field"
               />
             </div>
+           
+          </div>
+
+          <div className="assign-field-group assign-section-margin">
+            <label className="assign-field-label">Description / Instructions</label>
+            <textarea
+              name="description" value={form.description}
+              onChange={handleInputChange} className="assign-textarea-field"
+              placeholder="Enter assignment instructions, guidelines, and any additional notes..."
+            />
+          </div>
+
+          <div className="assign-grid-half assign-section-margin">
+            {/* <div className="assign-field-group">
+              <label className="assign-field-label">Deadline Date</label>
+              <input
+                type="date" name="deadline" value={form.deadline}
+                onChange={handleInputChange} className="assign-input-field"
+              />
+            </div>
+            <div className="assign-field-group">
+              <label className="assign-field-label">Deadline Time</label>
+              <input
+                type="time" name="deadlineTime" value={form.deadlineTime}
+                onChange={handleInputChange} className="assign-input-field"
+              />
+            </div> */}
           </div>
 
           {formError && (
