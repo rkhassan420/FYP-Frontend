@@ -2,28 +2,26 @@
 // import {
 //   UploadCloud, FileText, X, AlertCircle,
 //   Loader2, Maximize2, Minimize2,
-//   Eye, ExternalLink, AlertTriangle, CheckCircle,
+//   Eye, ExternalLink, CheckCircle,
 // } from "lucide-react";
 // import { Icon, ICONS } from "../../pages/Teacher/TeacherIcons";
 // import { classService } from "../../services/classService";
 // import "./Evaluator.css";
 
-// // ── History helpers ────────────────────────────────────────────────────────────
-// const HISTORY_KEY = "ev_history";
-
-// export function loadHistory() {
-//   try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }
+// // ── History helpers — accept storagePrefix so teacher/guest don't conflict ────
+// export function loadHistory(prefix = "guest") {
+//   try { return JSON.parse(localStorage.getItem(`${prefix}_ev_history`)) || []; }
 //   catch { return []; }
 // }
 
-// export function clearHistory() {
-//   localStorage.removeItem(HISTORY_KEY);
-//   localStorage.removeItem("ev_pending");
+// export function clearHistory(prefix = "guest") {
+//   localStorage.removeItem(`${prefix}_ev_history`);
+//   localStorage.removeItem(`${prefix}_ev_pending`);
 //   window.dispatchEvent(new CustomEvent("ev_history_updated"));
 // }
 
-// function saveToHistory(submissionData, result, isProcessing = false) {
-//   const history = loadHistory();
+// function saveToHistory(submissionData, result, isProcessing = false, prefix = "guest") {
+//   const history = loadHistory(prefix);
 //   const entry = {
 //     id:               submissionData.id,
 //     title:            submissionData.title,
@@ -40,12 +38,12 @@
 //     savedAt:          Date.now(),
 //   };
 //   const updated = [entry, ...history.filter((h) => h.id !== submissionData.id)].slice(0, 50);
-//   localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
+//   localStorage.setItem(`${prefix}_ev_history`, JSON.stringify(updated));
 //   window.dispatchEvent(new CustomEvent("ev_history_updated"));
 // }
 
-// function markHistoryComplete(submissionId, result) {
-//   const history = loadHistory();
+// function markHistoryComplete(submissionId, result, prefix = "guest") {
+//   const history = loadHistory(prefix);
 //   const updated = history.map((h) =>
 //     h.id === submissionId
 //       ? {
@@ -60,8 +58,16 @@
 //         }
 //       : h
 //   );
-//   localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
+//   localStorage.setItem(`${prefix}_ev_history`, JSON.stringify(updated));
 //   window.dispatchEvent(new CustomEvent("ev_history_updated"));
+// }
+
+// function removeFromLocalHistory(id, prefix = "guest") {
+//   try {
+//     const history = loadHistory(prefix);
+//     localStorage.setItem(`${prefix}_ev_history`, JSON.stringify(history.filter((h) => h.id !== id)));
+//     window.dispatchEvent(new CustomEvent("ev_history_updated"));
+//   } catch {}
 // }
 
 // // ── Processing Loader ─────────────────────────────────────────────────────────
@@ -84,8 +90,7 @@
 // }
 
 // function ProcessingLoader({ isComplete, percentage, startTime }) {
-//   // Track wall-clock "now" — elapsed is always derived fresh from startTime prop
-//   const [now, setNow]     = useState(Date.now);
+//   const [now, setNow]       = useState(Date.now);
 //   const [msgIdx, setMsgIdx] = useState(0);
 
 //   useEffect(() => {
@@ -226,7 +231,16 @@
 // };
 
 // // ── Main Evaluator ────────────────────────────────────────────────────────────
-// export default function Evaluator({ fullscreen, setFullscreen, activeSessionId, onSessionChange }) {
+// // storagePrefix: "guest" for guest portal, "teacher" for teacher dashboard
+// export default function Evaluator({
+//   fullscreen,
+//   setFullscreen,
+//   activeSessionId,
+//   onSessionChange,
+//   storagePrefix = "guest",
+// }) {
+//   const PENDING_KEY = `${storagePrefix}_ev_pending`;
+
 //   const [selectedFile, setSelectedFile]         = useState(null);
 //   const [assignmentTitle, setAssignmentTitle]   = useState("");
 //   const [isDragging, setIsDragging]             = useState(false);
@@ -238,14 +252,13 @@
 //   const [processingStatus, setProcessingStatus] = useState(null);
 //   const [result, setResult]                     = useState(null);
 //   const [isProcessing, setIsProcessing]         = useState(false);
+//   const [terminateLoading, setTerminateLoading] = useState(false);
 
-//   // processingStart lives in a ref — changing it never causes ProcessingLoader to remount/reset
-//   const processingStartRef  = useRef(null);
-//   const activeJobIdRef      = useRef(null);   // track which job is currently polling
-//   const fileInputRef        = useRef(null);
-//   const pollingRef          = useRef(null);
+//   const processingStartRef = useRef(null);
+//   const activeJobIdRef     = useRef(null);
+//   const fileInputRef       = useRef(null);
+//   const pollingRef         = useRef(null);
 
-//   // Helper: update ref AND trigger a re-render
 //   const [, forceRender] = useState(0);
 //   const setProcessingStart = useCallback((t) => {
 //     processingStartRef.current = t;
@@ -262,7 +275,7 @@
 //   // ── Cleanup polling on unmount ────────────────────────────────────────────
 //   useEffect(() => () => clearInterval(pollingRef.current), []);
 
-//   // ── Listen for cancel from sidebar ──────────────────────────────────────────
+//   // ── Listen for cancel from sidebar ───────────────────────────────────────
 //   useEffect(() => {
 //     const handler = (e) => {
 //       const cancelledId = e.detail?.id;
@@ -270,7 +283,7 @@
 //         clearInterval(pollingRef.current);
 //         pollingRef.current = null;
 //         activeJobIdRef.current = null;
-//         localStorage.removeItem("ev_pending");
+//         localStorage.removeItem(PENDING_KEY);
 //         processingStartRef.current = null;
 //         setIsProcessing(false);
 //         setProcessingStatus(null);
@@ -282,11 +295,11 @@
 //     };
 //     window.addEventListener("ev_cancel_submission", handler);
 //     return () => window.removeEventListener("ev_cancel_submission", handler);
-//   }, [onSessionChange]);
+//   }, [onSessionChange, PENDING_KEY]);
 
 //   // ── Restore in-progress submission from localStorage on reload ────────────
 //   useEffect(() => {
-//     const saved = localStorage.getItem("ev_pending");
+//     const saved = localStorage.getItem(PENDING_KEY);
 //     if (!saved) return;
 //     try {
 //       const { submissionData: sd, startTime } = JSON.parse(saved);
@@ -297,19 +310,17 @@
 //       setIsProcessing(true);
 //       startPolling(sd.id);
 //     } catch {
-//       localStorage.removeItem("ev_pending");
+//       localStorage.removeItem(PENDING_KEY);
 //     }
 //   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-//   // ── Handle activeSessionId changes (sidebar clicks + New Evaluation) ──────
+//   // ── Handle activeSessionId changes ───────────────────────────────────────
 //   useEffect(() => {
-//     // ── null = New Evaluation / Evaluate Another File ──────────────────────
 //     if (activeSessionId === null || activeSessionId === undefined) {
-//       // Stop polling only if we're not still processing in background
 //       clearInterval(pollingRef.current);
 //       pollingRef.current = null;
 //       activeJobIdRef.current = null;
-//       localStorage.removeItem("ev_pending");
+//       localStorage.removeItem(PENDING_KEY);
 //       processingStartRef.current = null;
 //       setIsProcessing(false);
 //       setProcessingStatus(null);
@@ -324,26 +335,21 @@
 //       return;
 //     }
 
-//     const history = loadHistory();
+//     const history = loadHistory(storagePrefix);
 //     const entry = history.find((h) => h.id === activeSessionId);
 //     if (!entry) return;
 
-//     // ── Switching back to the job that is currently processing ────────────
-//     // DON'T touch processingStart — the timer must keep running uninterrupted
 //     if (entry.isProcessing && activeJobIdRef.current === activeSessionId) {
-//       // Already showing this job; just ensure polling is alive
 //       if (!pollingRef.current) startPolling(entry.id);
 //       return;
 //     }
 
-//     // Stop current polling before switching to a different entry
 //     clearInterval(pollingRef.current);
 //     pollingRef.current = null;
 
-//     // ── Entry is still processing (e.g. after reload or switching back) ───
 //     if (entry.isProcessing) {
 //       const pending = (() => {
-//         try { return JSON.parse(localStorage.getItem("ev_pending")); } catch { return null; }
+//         try { return JSON.parse(localStorage.getItem(PENDING_KEY)); } catch { return null; }
 //       })();
 //       const startTime = entry.startTime ?? pending?.startTime ?? Date.now();
 
@@ -362,9 +368,8 @@
 //       return;
 //     }
 
-//     // ── Completed entry ───────────────────────────────────────────────────
 //     activeJobIdRef.current = null;
-//     localStorage.removeItem("ev_pending");
+//     localStorage.removeItem(PENDING_KEY);
 //     processingStartRef.current = null;
 //     setIsProcessing(false);
 //     setProcessingStatus(null);
@@ -407,19 +412,44 @@
 //           pollingRef.current = null;
 //           activeJobIdRef.current = null;
 //           setIsProcessing(false);
-//           localStorage.removeItem("ev_pending");
+//           localStorage.removeItem(PENDING_KEY);
 //           const found = await fetchResult(submissionId);
 //           setResult(found);
-//           markHistoryComplete(submissionId, found);
+//           markHistoryComplete(submissionId, found, storagePrefix);
 //         }
 //       } catch {
 //         clearInterval(pollingRef.current);
 //         pollingRef.current = null;
 //         setIsProcessing(false);
-//         localStorage.removeItem("ev_pending");
+//         localStorage.removeItem(PENDING_KEY);
 //       }
 //     }, 3000);
-//   }, []);
+//   }, [PENDING_KEY, storagePrefix]);
+
+//   // ── Terminate ─────────────────────────────────────────────────────────────
+//   const handleTerminate = async () => {
+//     if (!window.confirm("Terminate processing? This will reset and let you resubmit.")) return;
+//     setTerminateLoading(true);
+//     try {
+//       await classService.terminateSubmission(submissionData.id);
+//       clearInterval(pollingRef.current);
+//       pollingRef.current = null;
+//       activeJobIdRef.current = null;
+//       localStorage.removeItem(PENDING_KEY);
+//       removeFromLocalHistory(submissionData.id, storagePrefix);
+//       processingStartRef.current = null;
+//       setIsProcessing(false);
+//       setProcessingStatus(null);
+//       setSubmissionData(null);
+//       setResult(null);
+//       setUploadState("idle");
+//       if (onSessionChange) onSessionChange(null);
+//     } catch (err) {
+//       console.warn("Terminate failed:", err);
+//     } finally {
+//       setTerminateLoading(false);
+//     }
+//   };
 
 //   // ── File validation ───────────────────────────────────────────────────────
 //   const handleFile = (file) => {
@@ -474,8 +504,8 @@
 //       setSelectedFile(null);
 //       setAssignmentTitle("");
 
-//       saveToHistory(sd, null, true);
-//       localStorage.setItem("ev_pending", JSON.stringify({ submissionData: sd, startTime }));
+//       saveToHistory(sd, null, true, storagePrefix);
+//       localStorage.setItem(PENDING_KEY, JSON.stringify({ submissionData: sd, startTime }));
 //       if (onSessionChange) onSessionChange(sd.id);
 //       setTimeout(() => startPolling(res.id), 2000);
 
@@ -490,9 +520,8 @@
 //     }
 //   };
 
-//   // ── Reset (Evaluate Another File / New Evaluation) ────────────────────────
+//   // ── Reset ─────────────────────────────────────────────────────────────────
 //   const handleReset = () => {
-//     // Tell parent → null, which triggers the activeSessionId effect to clear everything
 //     if (onSessionChange) onSessionChange(null);
 //   };
 
@@ -532,6 +561,7 @@
 //                 <p className="file-size">Submitted on {submissionData.date}</p>
 //               </div>
 //             </div>
+
 //             {processingStartRef.current && (
 //               <ProcessingLoader
 //                 isComplete={processingStatus?.is_complete ?? false}
@@ -539,10 +569,24 @@
 //                 startTime={processingStartRef.current}
 //               />
 //             )}
-//             <button className="ev-btn-reset ev-btn-reset--disabled" disabled style={{ marginTop: "12px" }}>
-//               <Loader2 size={14} className="processing-spinner" />
-//               Processing — please wait...
-//             </button>
+
+//             {!(processingStatus?.is_complete) && (
+//               <button
+//                 onClick={handleTerminate}
+//                 disabled={terminateLoading}
+//                 style={{
+//                   display: "flex", alignItems: "center", gap: "6px",
+//                   marginTop: "12px", padding: "7px 16px",
+//                   borderRadius: "8px", border: "none",
+//                   background: "#ef4444", color: "#fff",
+//                   fontWeight: 600, fontSize: "13px", cursor: "pointer",
+//                   opacity: terminateLoading ? 0.7 : 1,
+//                 }}
+//               >
+//                 <X size={14} />
+//                 {terminateLoading ? "Terminating..." : "Terminate & Re-evaluate"}
+//               </button>
+//             )}
 //           </div>
 
 //         ) : (
@@ -633,12 +677,14 @@
 //   );
 // }
 
+
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
   UploadCloud, FileText, X, AlertCircle,
   Loader2, Maximize2, Minimize2,
-  Eye, ExternalLink, CheckCircle,
+  Eye, ExternalLink, CheckCircle, Type,
 } from "lucide-react";
+import { jsPDF } from "jspdf";
 import { Icon, ICONS } from "../../pages/Teacher/TeacherIcons";
 import { classService } from "../../services/classService";
 import "./Evaluator.css";
@@ -703,6 +749,40 @@ function removeFromLocalHistory(id, prefix = "guest") {
     localStorage.setItem(`${prefix}_ev_history`, JSON.stringify(history.filter((h) => h.id !== id)));
     window.dispatchEvent(new CustomEvent("ev_history_updated"));
   } catch {}
+}
+
+// ── Text → PDF converter ──────────────────────────────────────────────────────
+function textToPdfFile(text, filename = "submission.pdf") {
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth  = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin     = 50;
+  const maxWidth   = pageWidth - margin * 2;
+  const lineHeight = 16;
+  const fontSize   = 12;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(fontSize);
+
+  const paragraphs = text.split(/\n+/);
+  let y = margin;
+
+  for (const para of paragraphs) {
+    if (!para.trim()) { y += lineHeight; continue; }
+    const lines = doc.splitTextToSize(para.trim(), maxWidth);
+    for (const line of lines) {
+      if (y + lineHeight > pageHeight - margin) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(line, margin, y);
+      y += lineHeight;
+    }
+    y += lineHeight * 0.5; // paragraph gap
+  }
+
+  const blob = doc.output("blob");
+  return new File([blob], filename, { type: "application/pdf" });
 }
 
 // ── Processing Loader ─────────────────────────────────────────────────────────
@@ -858,15 +938,32 @@ const ResultCard = ({ result, submissionData, onReset }) => {
           <span className="ev-no-report">No report file available</span>
         )}
         <button className="ev-btn-reset" onClick={onReset}>
-          <UploadCloud size={15} /> Evaluate Another File
+          <UploadCloud size={15} /> Evaluate Another
         </button>
       </div>
     </div>
   );
 };
 
+// ── Word / char counter helper ────────────────────────────────────────────────
+function TextStats({ text }) {
+  const chars = text.length;
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const tooShort = words < 50;
+  return (
+    <div className="ev-text-stats">
+      <span className={tooShort && chars > 0 ? "ev-text-stats--warn" : ""}>
+        {words} word{words !== 1 ? "s" : ""}
+      </span>
+      <span>{chars} chars</span>
+      {tooShort && chars > 0 && (
+        <span className="ev-text-stats--warn">⚠ Minimum ~50 words recommended</span>
+      )}
+    </div>
+  );
+}
+
 // ── Main Evaluator ────────────────────────────────────────────────────────────
-// storagePrefix: "guest" for guest portal, "teacher" for teacher dashboard
 export default function Evaluator({
   fullscreen,
   setFullscreen,
@@ -875,6 +972,10 @@ export default function Evaluator({
   storagePrefix = "guest",
 }) {
   const PENDING_KEY = `${storagePrefix}_ev_pending`;
+
+  // input mode: "file" | "text"
+  const [inputMode, setInputMode]               = useState("file");
+  const [textInput, setTextInput]               = useState("");
 
   const [selectedFile, setSelectedFile]         = useState(null);
   const [assignmentTitle, setAssignmentTitle]   = useState("");
@@ -963,6 +1064,7 @@ export default function Evaluator({
       setResult(null);
       setSelectedFile(null);
       setAssignmentTitle("");
+      setTextInput("");
       setUploadState("idle");
       setUploadProgress(0);
       setErrorMessage("");
@@ -995,6 +1097,7 @@ export default function Evaluator({
       setResult(null);
       setProcessingStatus(null);
       setSelectedFile(null);
+      setTextInput("");
       setAssignmentTitle("");
       setUploadState("idle");
       setErrorMessage("");
@@ -1009,6 +1112,7 @@ export default function Evaluator({
     setIsProcessing(false);
     setProcessingStatus(null);
     setSelectedFile(null);
+    setTextInput("");
     setAssignmentTitle("");
     setUploadState("idle");
     setErrorMessage("");
@@ -1098,10 +1202,19 @@ export default function Evaluator({
     setUploadState("idle");
   };
 
+  // ── Validation ────────────────────────────────────────────────────────────
   const validate = () => {
     const errors = {};
-    if (!assignmentTitle.trim()) errors.title = "File name is required.";
-    if (!selectedFile)           errors.file  = "Please select a PDF file.";
+    if (!assignmentTitle.trim()) {
+      errors.title = "File name is required.";
+    }
+    if (inputMode === "file") {
+      if (!selectedFile) errors.file = "Please select a PDF file.";
+    } else {
+      if (!textInput.trim()) errors.file = "Please enter some text to evaluate.";
+      else if (textInput.trim().split(/\s+/).length < 10)
+        errors.file = "Please enter at least 10 words for meaningful analysis.";
+    }
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -1118,14 +1231,24 @@ export default function Evaluator({
     }, 200);
 
     try {
-      const res       = await classService.guestSubmitAssignment(null, assignmentTitle.trim(), selectedFile);
+      // Convert text to PDF if in text mode
+      let fileToSubmit = selectedFile;
+      let displayName  = selectedFile?.name ?? "";
+
+      if (inputMode === "text") {
+        const safeName  = assignmentTitle.trim().replace(/[^a-z0-9_\- ]/gi, "_");
+        fileToSubmit    = textToPdfFile(textInput, `${safeName}.pdf`);
+        displayName     = `${safeName}.pdf`;
+      }
+
+      const res       = await classService.guestSubmitAssignment(null, assignmentTitle.trim(), fileToSubmit);
       const startTime = Date.now();
       clearInterval(progressInterval);
       setUploadProgress(100);
       setUploadState("success");
 
       const sd = {
-        name:      selectedFile.name,
+        name:      displayName,
         title:     assignmentTitle.trim(),
         date:      new Date().toLocaleString(),
         id:        res.id,
@@ -1137,6 +1260,7 @@ export default function Evaluator({
       setProcessingStart(startTime);
       setIsProcessing(true);
       setSelectedFile(null);
+      setTextInput("");
       setAssignmentTitle("");
 
       saveToHistory(sd, null, true, storagePrefix);
@@ -1158,6 +1282,13 @@ export default function Evaluator({
   // ── Reset ─────────────────────────────────────────────────────────────────
   const handleReset = () => {
     if (onSessionChange) onSessionChange(null);
+  };
+
+  // ── Mode switch (clear errors) ────────────────────────────────────────────
+  const handleModeSwitch = (mode) => {
+    setInputMode(mode);
+    setFieldErrors({});
+    setErrorMessage("");
   };
 
   const processingPct = processingStatus?.processing_percentage ?? 0;
@@ -1226,6 +1357,8 @@ export default function Evaluator({
 
         ) : (
           <div className="upload-state">
+
+            {/* ── Assignment Title ── */}
             <div className="evaluator-input-group">
               <label className="evaluator-input-label">
                 Assignment / File Name <span className="ev-required">*</span>
@@ -1245,56 +1378,108 @@ export default function Evaluator({
               )}
             </div>
 
-            {!selectedFile ? (
-              <div
-                className={`drop-zone ${isDragging ? "dragging" : ""} ${fieldErrors.file ? "ev-dropzone-error" : ""}`}
-                onClick={() => fileInputRef.current.click()}
-                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-                onDragLeave={() => setIsDragging(false)}
-                onDrop={(e) => {
-                  e.preventDefault(); setIsDragging(false);
-                  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-                }}
+            {/* ── Input Mode Tabs ── */}
+            <div className="ev-mode-tabs">
+              <button
+                type="button"
+                className={`ev-mode-tab ${inputMode === "file" ? "ev-mode-tab--active" : ""}`}
+                onClick={() => handleModeSwitch("file")}
               >
-                <input type="file" ref={fileInputRef} hidden accept=".pdf"
-                  onChange={(e) => handleFile(e.target.files[0])} />
-                <UploadCloud size={40} className="upload-icon" />
-                <h4>Click or drag file to upload</h4>
-                <p>PDF only · Max 10MB</p>
-              </div>
-            ) : (
-              <div className="file-preview">
-                <FileText size={28} className="file-type-icon" />
-                <div className="file-info">
-                  <p className="file-name">{selectedFile.name}</p>
-                  <p className="file-size">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
-                </div>
-                {uploadState === "idle" && (
-                  <button className="remove-file-btn" onClick={() => {
-                    setSelectedFile(null);
-                    setFieldErrors((p) => ({ ...p, file: "" }));
-                  }}>
-                    <X size={18} />
-                  </button>
+                <FileText size={14} />
+                PDF Upload
+              </button>
+              <button
+                type="button"
+                className={`ev-mode-tab ${inputMode === "text" ? "ev-mode-tab--active" : ""}`}
+                onClick={() => handleModeSwitch("text")}
+              >
+                <Type size={14} />
+                Paste Text
+              </button>
+            </div>
+
+            {/* ── File Mode ── */}
+            {inputMode === "file" && (
+              <>
+                {!selectedFile ? (
+                  <div
+                    className={`drop-zone ${isDragging ? "dragging" : ""} ${fieldErrors.file ? "ev-dropzone-error" : ""}`}
+                    onClick={() => fileInputRef.current.click()}
+                    onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                    onDragLeave={() => setIsDragging(false)}
+                    onDrop={(e) => {
+                      e.preventDefault(); setIsDragging(false);
+                      if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+                    }}
+                  >
+                    <input type="file" ref={fileInputRef} hidden accept=".pdf"
+                      onChange={(e) => handleFile(e.target.files[0])} />
+                    <UploadCloud size={40} className="upload-icon" />
+                    <h4>Click or drag file to upload</h4>
+                    <p>PDF only · Max 10MB</p>
+                  </div>
+                ) : (
+                  <div className="file-preview">
+                    <FileText size={28} className="file-type-icon" />
+                    <div className="file-info">
+                      <p className="file-name">{selectedFile.name}</p>
+                      <p className="file-size">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                    </div>
+                    {uploadState === "idle" && (
+                      <button className="remove-file-btn" onClick={() => {
+                        setSelectedFile(null);
+                        setFieldErrors((p) => ({ ...p, file: "" }));
+                      }}>
+                        <X size={18} />
+                      </button>
+                    )}
+                  </div>
                 )}
+              </>
+            )}
+
+            {/* ── Text Mode ── */}
+            {inputMode === "text" && (
+              <div className="ev-text-mode">
+                <textarea
+                  className={`ev-text-input ${fieldErrors.file ? "ev-input-error" : ""}`}
+                  placeholder="Paste or type your essay, report, or assignment text here…"
+                  value={textInput}
+                  rows={10}
+                  onChange={(e) => {
+                    setTextInput(e.target.value);
+                    if (fieldErrors.file) setFieldErrors((p) => ({ ...p, file: "" }));
+                  }}
+                />
+                <TextStats text={textInput} />
+                <p className="ev-text-hint">
+                  Your text will be converted to a PDF automatically before analysis.
+                </p>
               </div>
             )}
 
+            {/* ── Errors ── */}
             {fieldErrors.file && (
               <span className="ev-field-error"><AlertCircle size={12} /> {fieldErrors.file}</span>
             )}
             {errorMessage && (
               <div className="upload-error"><AlertCircle size={14} /> {errorMessage}</div>
             )}
+
+            {/* ── Upload progress ── */}
             {uploadState === "uploading" && (
               <div className="progress-container">
                 <div className="progress-bar-wrapper">
                   <div className="progress-fill" style={{ width: `${uploadProgress}%` }} />
                 </div>
-                <span className="progress-text">Uploading... {Math.round(uploadProgress)}%</span>
+                <span className="progress-text">
+                  {inputMode === "text" ? "Converting & uploading..." : "Uploading..."}{" "}
+                  {Math.round(uploadProgress)}%
+                </span>
               </div>
             )}
 
+            {/* ── Submit ── */}
             <button className="btn-primary submit-btn"
               disabled={uploadState === "uploading"} onClick={handleSubmit}>
               {uploadState === "uploading"
@@ -1302,9 +1487,14 @@ export default function Evaluator({
                 : <><UploadCloud size={15} /> Start Analysis</>}
             </button>
 
-            {!selectedFile && !assignmentTitle && (
+            {/* ── Empty hint ── */}
+            {inputMode === "file" && !selectedFile && !assignmentTitle && (
               <p className="evaluator-hint">Enter a name and upload a PDF to get started</p>
             )}
+            {inputMode === "text" && !textInput && !assignmentTitle && (
+              <p className="evaluator-hint">Enter a name and paste your text to get started</p>
+            )}
+
           </div>
         )}
       </div>
