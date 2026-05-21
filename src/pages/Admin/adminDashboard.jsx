@@ -177,6 +177,7 @@ import axios from "axios";
 import { Icon, ICONS } from "../../pages/Teacher/TeacherIcons";
 import AdminAddStudents from "../../pages/Admin/AdminAddStudents";
 import AdminTeacherManagement from "../../pages/Admin/AdminTeacherManagement";
+import GuestManagement from "./GuestManage";
 
 export default function AdminDashboard() {
   const [activePage, setActivePage] = useState(() => {
@@ -363,7 +364,7 @@ const fetchUsers = async () => {
 
          {activePage === "guest-manage" && (
           <div className="content full">
-            <AdminTeacherManagement />
+            <GuestManagement />
           </div>
         )}
 
