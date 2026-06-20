@@ -90,23 +90,7 @@ export default function AdminSidebar({ activePage, setActivePage }) {
           <Icon d={ICONS.users} size={18} />
           {!collapsed && <span>Manage Guest</span>}
         </div>
-
-        {/* <div 
-          className={`teacher-nav-item ${activePage === "configure-rules" ? "active" : ""}`}
-          onClick={() => handleNavigation("configure-rules")}
-        >
-          
-          <Icon d={ICONS.sliders || ICONS.settings} size={18} /> 
-          {!collapsed && <span>Configure Rules</span>}
-        </div> */}
-
-        {/* <div 
-          className={`teacher-nav-item ${activePage === "setting" ? "active" : ""}`}
-          onClick={() => handleNavigation("setting")}
-        >
-          <Icon d={ICONS.settings} size={18} />
-          {!collapsed && <span>Settings</span>}
-        </div> */}
+       
       </nav>
 
       <div className="teacher-sidebar-footer">

@@ -1,5 +1,6 @@
 import React from "react";
-import "./About.css"
+// import "./About.css"
+import '../landing.css'
 
 const Code2Icon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

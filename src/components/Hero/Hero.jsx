@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Hero.css"
+// import "./Hero.css";
 
 const SparklesIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -9,92 +9,102 @@ const SparklesIcon = ({ size = 18 }) => (
 );
 
 const LogInIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
     <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
   </svg>
 );
 
-const CheckCircleIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-    <polyline points="22 4 12 14.01 9 11.01"/>
-  </svg>
-);
+const AnimatedNumber = ({ end, suffix = "" }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        let start = 0;
+        const duration = 1800;
+        const step = Math.ceil(end / (duration / 16));
 
+        const timer = setInterval(() => {
+          start += step;
+          if (start >= end) {
+            setCount(end);
+            clearInterval(timer);
+          } else {
+            setCount(start);
+          }
+        }, 16);
+      }
+    }, { threshold: 0.6 });
 
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end]);
 
-function Stat() {
-
-  return(
-     <div className="stats-container fade-up stagger-4">
-      
-      <div className="stat-box">
-        <div className="stat-number blue">10K+</div>
-        <p className="stat-text">Submissions Evaluated</p>
-      </div>
-
-      <div className="stat-box middle">
-        <div className="stat-number purple">98%</div>
-        <p className="stat-text">Accuracy Rate</p>
-      </div>
-
-      <div className="stat-box">
-        <div className="stat-number green">50+</div>
-        <p className="stat-text">Institutions</p>
-      </div>
-
-    </div>
-  ) 
-}
+  return <span ref={ref} className="stat-number">{count}{suffix}</span>;
+};
 
 function Hero() {
-
   const navigate = useNavigate();
-  
+
   return (
     <section className="hero" id="home">
+      {/* Background Elements */}
       <div className="glow-orb orb-blue" />
       <div className="glow-orb orb-purple" />
+      <div className="hero-grid" />
+
       <div className="hero-content">
+        {/* Badge */}
         <div className="badge fade-up">
-          <SparklesIcon size={14} /> Powered by Advanced AI
+          <SparklesIcon size={16} />
+          <span>POWERED BY ADVANCED AI</span>
         </div>
-        <h1 className="hero-title fade-up stagger-1">AI Content Evaluator</h1>
-        <p className="hero-subtitle fade-up stagger-2">Smart Academic Evaluation System Powered by AI</p>
+
+        {/* Headline */}
+        <h1 className="hero-title fade-up stagger-1">
+          Intelligent <span className="gradient-text">Academic</span> Evaluation
+        </h1>
+
+        <p className="hero-subtitle fade-up stagger-2">
+          AI-driven academic evaluation with intelligent authorship detection and detailed feedback generation.
+        </p>
+
+        {/* CTA */}
         <div className="hero-cta fade-up stagger-3">
-          <button className="btn-primary btn-lg" onClick={() => navigate("/guest/login")} >Get Started Free →</button>
-          {/* <button className="btn-outline btn-lg"  >
-            <LogInIcon /> Try Demo
-          </button> */}
-          
+          <button 
+            className="btn-primary" 
+            onClick={() => navigate("/guest/login")}
+          >
+            Get Started Free
+          </button>
+          <button 
+            className="btn-secondary"
+            onClick={() => navigate("/demo")}
+          >
+            <LogInIcon /> Watch Demo
+          </button>
         </div>
 
-        <Stat/>
-
-        <div className="hero-card fade-up stagger-4">
-          <div className="card-dots">
-            <span className="dot dot-red" />
-            <span className="dot dot-yellow" />
-            <span className="dot dot-green" />
-            <div className="card-bar" />
+        {/* Trust / Stats */}
+        <div className="stats-container fade-up stagger-4">
+          <div className="stat-box">
+            <AnimatedNumber end={150} suffix="+" />
+            <p className="stat-text">Submissions Evaluated</p>
           </div>
-          <div className="card-grid">
-            <div className="card-block block-blue" />
-            <div className="card-block block-green" />
-            <div className="card-block block-purple" />
+          <div className="stat-box">
+            <AnimatedNumber end={90} suffix="%" />
+            <p className="stat-text">AI Accuracy</p>
           </div>
-          <div className="card-lines">
-            <div className="card-line" />
-            <div className="card-line w-4-5" />
-            <div className="card-line w-3-5" />
-          </div>
-          <div className="ai-badge">
-            <CheckCircleIcon /> AI Evaluated
+          <div className="stat-box">
+            <AnimatedNumber end={64} suffix="+" />
+            <p className="stat-text">Institutions</p>
           </div>
         </div>
       </div>
     </section>
   );
-} export default Hero;
+}
+
+export default Hero;

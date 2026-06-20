@@ -1,151 +1,164 @@
-.notfound-container { 
-  min-height: 100dvh; 
+/* ============================================================
+   PREMIUM 404 ERROR PAGE - THEME CONSISTENT
+============================================================ */
+
+.notfound-container {
+  min-height: 100dvh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, var(--bg-slate-900), var(--bg-slate-800));
-  color: var(--text-white);
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
   text-align: center;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Background Glow Orbs */
+.notfound-container::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--purple) 0%, transparent 65%);
+  filter: blur(100px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.notfound-container::after {
+  content: "";
+  position: absolute;
+  bottom: -120px;
+  right: -120px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+  filter: blur(90px);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Content Wrapper */
+.notfound-content {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+}
+
+/* Icon */
 .notfound-icon {
-  margin-bottom: 20px;
-  animation: float 2s ease-in-out infinite;
-  color: var(--accent-sky);
+  margin-bottom: 2rem;
+  color: var(--accent-sky, #67e8f9);
+  animation: floatIcon 4s ease-in-out infinite;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
 }
 
+/* 404 Title */
 .notfound-title {
-  font-size: 100px;
-  font-weight: 900;
-  margin: 0;
-  background: linear-gradient(90deg, var(--accent-sky), var(--accent-indigo));
-  background-clip: text;  
-  -webkit-background-clip: text;  
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 18vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  margin: 0 0 0.5rem;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height: 1; /* Keeps the spacing tight */
+  letter-spacing: -0.06em;
 }
 
-
+/* Subtitle */
 .notfound-subtitle {
-  font-size: 28px;
-  margin-top: 15px;
-  margin-bottom: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4.5vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.025em;
 }
 
-
+/* Description */
 .notfound-text {
-  margin: 15px 0 30px;
-  color: var(--text-muted);
-  max-width: 400px;
-  font-size: 16px;
-  line-height: 1.5;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 auto 2.5rem;
 }
 
-
+/* Buttons */
 .notfound-actions {
   display: flex;
-  gap: 16px;
+  gap: 1rem;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; 
-  width: 100%;
+  flex-wrap: wrap;
 }
-
 
 .notfound-btn {
-  padding: 12px 28px;
-  border-radius: 30px;
-  border: none;
-  background: linear-gradient(90deg, var(--accent-sky), var(--accent-indigo));
-  color: var(--text-white);
-  font-size: 16px;
+  padding: 0.95rem 2rem;
+  border-radius: var(--radius-full);
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block; /* Good practice for link/button hybrids */
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  white-space: nowrap;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.notfound-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 25px var(--shadow-indigo);
+/* Primary Button */
+.notfound-btn.primary {
+  background: var(--grad-primary);
+  color: white;
+  box-shadow: 0 8px 25px -6px rgba(124, 58, 237, 0.4);
 }
 
-
-.notfound-btn-secondary {
-  background: transparent;
-  border: 2px solid var(--accent-sky);
-  color: var(--accent-sky);
+.notfound-btn.primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px -8px rgba(124, 58, 237, 0.5);
 }
 
-.notfound-btn-secondary:hover {
-  background: var(--hover-sky-bg);
-  box-shadow: 0 10px 25px var(--shadow-sky);
+/* Secondary Button */
+.notfound-btn.secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
-/* =========================================
-   RESPONSIVE BREAKPOINTS
-   ========================================= */
-
-
-@media screen and (max-width: 992px) {
-  .notfound-title {
-    font-size: 85px;
-  }
-  .notfound-subtitle {
-    font-size: 24px;
-  }
+.notfound-btn.secondary:hover {
+  background: var(--surface-2);
+  border-color: var(--border-glow);
+  transform: translateY(-3px);
 }
 
-
-@media screen and (max-width: 768px) {
-  .notfound-title {
-    font-size: 70px;
-  }
-  .notfound-subtitle {
-    font-size: 22px;
-  }
-  .notfound-text {
-    font-size: 15px;
-    max-width: 90%;
-  }
-  .notfound-icon svg {
-    width: 65px;
-    height: 65px;
-  }
-}
-
-
-@media screen and (max-width: 480px) {
-  .notfound-title {
-    font-size: 55px;
-  }
-  .notfound-subtitle {
-    font-size: 20px;
-  }
-  .notfound-text {
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  
- 
+/* Responsive */
+@media (max-width: 640px) {
   .notfound-actions {
     flex-direction: column;
-    gap: 12px;
-    max-width: 280px; 
+    align-items: center;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
   }
-
+  
   .notfound-btn {
-    width: 100%; 
-    padding: 14px 20px; 
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .notfound-icon svg {
+    width: 72px;
+    height: 72px;
   }
 }

@@ -1,7 +1,8 @@
 import { useState, useEffect,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../Theme/ThemeContext"
-import "./Navbar.css";
+// import "./Navbar.css";
+
 
 function Navbar({ onScroll }) {
 
